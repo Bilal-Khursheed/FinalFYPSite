@@ -66,12 +66,9 @@ class pageWrapper extends Component {
                     Contact
                   </Link>
                 </li>
-
                 <li className="nav-item">
                   <Link className="nav-link js-scroll-trigger" to="/login">
-                    <button type="button" class="btn btn-warning">
-                      Login
-                    </button>
+                    Login
                   </Link>
                 </li>
               </ul>

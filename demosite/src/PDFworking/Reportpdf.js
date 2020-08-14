@@ -1,5 +1,5 @@
 import React from "react";
-import 'tachyons'
+import "tachyons";
 
 import {
   Page,
@@ -11,22 +11,15 @@ import {
 } from "@react-pdf/renderer";
 import { PDFViewer } from "@react-pdf/renderer";
 
-
 function Reportpdf() {
-  const pdfstyle = 
-{
-  width: 1000 ,
-  height: 900
-}
+  const pdfstyle = {
+    width: 1000,
+    height: 900
+  };
   return (
     <div className="App tc ma6-ns ba4-ns">
       <div>
         <h1 className="tc">MID System Report</h1>
-        <PDFDownloadLink document={<Mydoc />} fileName="sample.pdf">
-          {({ bolb, url, loading, error }) =>
-            loading ? "Loading Document...." : "Download Now!"
-          }
-        </PDFDownloadLink>
       </div>
       <PDFViewer className="tc pa4-ns" style={pdfstyle}>
         <Mydoc />
@@ -34,6 +27,15 @@ function Reportpdf() {
     </div>
   );
 } // Create styles
+
+/*
+        this is use to display download button on report file
+        <PDFDownloadLink document={<Mydoc />} fileName="sample.pdf">
+          {({ bolb, url, loading, error }) =>
+            loading ? "Loading Document...." : "Download Now!"
+          }
+        </PDFDownloadLink>
+*/
 const styles = StyleSheet.create({
   page: { backgroundColor: "tomato" },
 

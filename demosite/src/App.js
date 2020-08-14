@@ -2,6 +2,9 @@ import React from "react";
 import PageWrapper from "./componets/PageWrapper";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+//private routes
+import PrivateRoute from "./componets/Common/privateRoute/privateRoutes";
+
 // Pages
 import Home from "./componets/Pages/Home";
 import AboutUs from "./componets/Pages/AboutUs";
@@ -35,7 +38,11 @@ function App() {
 
           <Route path="/signup" component={SignUp} />
 
-          <Route path="/admin" component={AdminPage} />
+          <Route
+            component={AdminPage}
+            // auth={this.state.auth}
+            path="/admin"
+          />
 
           <Route path="/breastcancer" component={BreastCancer} />
 

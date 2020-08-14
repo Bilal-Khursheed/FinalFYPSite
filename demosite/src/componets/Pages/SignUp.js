@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Signup extends Component {
@@ -7,40 +7,49 @@ class Signup extends Component {
     email: "",
     fullName: "",
     Username: "",
-    password: ""
+    password: "",
+    navigate: false,
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
     console.log(" login e value", e.target.value);
   };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     console.log("name" + this.state.name);
     console.log("email" + this.state.email);
     e.preventDefault();
     //this will assign these variable values from this.state
     const { email, fullName, Username, password } = this.state;
     console.log("name after assigning" + email);
+
     //this will send data to rest api then api will send mail with given data to admin
     const form = await axios
       .post("/users/add", {
         email,
         fullName,
         Username,
-        password
+        password,
       })
-      .then(res => {
+      .then((res) => {
         if (res.status === 200) {
           console.log("your data in stored in database");
+          alert(
+            "Thanks for you Registration! your data is transferd to Admin will Aknowledge you by Email."
+          );
+          setTimeout(() => this.setState({ navigate: true }), 20);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(e);
       });
   };
 
   render() {
+    if (this.state.navigate) {
+      return <Redirect to="/" />;
+    }
     return (
       <div className="main-w3layouts wrapper">
         <h1 className="h1">SignUp </h1>
@@ -90,8 +99,16 @@ class Signup extends Component {
               />
               <div className="wthree-text">
                 <label className="anim">
-                  <input type="checkbox" className="checkbox" required="" />
-                  <span>I Agree To The Terms & Conditions</span>
+                  <input
+                    // style={{ background: "black" }}
+                    type="checkbox"
+                    // className="checkbox"
+                    required="required"
+                  />
+                  <strong>
+                    {" "}
+                    <span> I Agree To The Terms & Conditions</span>
+                  </strong>
                 </label>
                 <div className="clear"> </div>
               </div>
