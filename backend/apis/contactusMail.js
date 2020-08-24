@@ -28,7 +28,7 @@ app.post("/form", async (req, res) => {
     secure: false, // true for 465, false for other ports
     auth: {
       user: "balich616@gmail.com", //  user
-      pass: "comsats1433", //  password
+      pass: "comsats143", //  password
     },
   });
 

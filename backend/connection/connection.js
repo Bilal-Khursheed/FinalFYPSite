@@ -10,11 +10,11 @@ var connection = mysql.createConnection({
 });
 //check the connection with database
 connection.connect(function (err) {
-  if (err) {
-    return console.log("got an error while connecting with database");
-  } else {
-    return console.log(`Connected!!! with database ${connection.state}`);
-  }
+  if(!err)
+  console.log('Database is connected!');
+else
+  console.log('Database not connected! : '+ JSON.stringify(err, undefined,2));
 });
+
 
 module.exports = connection;

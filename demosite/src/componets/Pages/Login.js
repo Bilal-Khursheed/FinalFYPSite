@@ -11,6 +11,7 @@ class Login extends Component {
       password: "",
       auth: false,
       navigate: false,
+      role: 0,
     };
   }
   //i was doing this for private route purpose
@@ -26,7 +27,7 @@ class Login extends Component {
   handleSubmit = async (e) => {
     console.log("name" + this.state.email);
     console.log("email" + this.state.password);
-
+    e.preventDefault();
     //this will assign these variable values from this.state
     const { email, password } = this.state;
     console.log("name after assigning" + email);
@@ -36,14 +37,32 @@ class Login extends Component {
       // .then(() => setTimeout(() => this.setState({ navigate: true }), 2000))
       .then((Result) => {
         if (Result.status === "success") {
-          console.log("Login successFully");
-          this.setState({ auth: true });
-          console.log("auth after login is ", this.state.auth);
-          setTimeout(() => this.setState({ navigate: true }), 20);
-          
+          if (Result.role === "doctor") {
+            console.log("doctor Login successFully");
+            this.setState({ auth: true });
+            this.setState({ role: 1 });
+            console.log("auth after login is ", this.state.auth);
+            setTimeout(() => this.setState({ navigate: true }), 20);
+          } else if (Result.role === "Admin") {
+            console.log("admin Login successFully");
+            this.setState({ auth: true });
+            this.setState({ role: 2 });
+            console.log("auth after login is ", this.state.auth);
+            setTimeout(() => this.setState({ navigate: true }), 20);
+          } else if (Result.role === "patient") {
+            console.log("patient Login successFully");
+            this.setState({ auth: true });
+            this.setState({ role: 3 });
+            console.log("auth after login is ", this.state.auth);
+            setTimeout(() => this.setState({ navigate: true }), 20);
+          }
+          //console.log("Login successFully");
+          //this.setState({ auth: true });
+          // console.log("auth after login is ", this.state.auth);
+          //setTimeout(() => this.setState({ navigate: true }), 20);
+
           //<Redirect to="/admin"/>;
         } else {
-          
           alert("Sorrrrrry !!!! Un-authenticated User");
           window.location.reload(false);
         }
@@ -71,7 +90,13 @@ class Login extends Component {
 
   render() {
     if (this.state.navigate) {
-      return <Redirect to="/admin" />;
+      if (this.state.role === 1) {
+        return <Redirect to="/doctorportal" />;
+      } else if (this.state.role === 2) {
+        return <Redirect to="/adminportal" />;
+      } else if (this.state.role === 3) {
+        return <Redirect to="/patientportal" />; //patientportal
+      }
     }
     return (
       // <div>
@@ -115,7 +140,7 @@ class Login extends Component {
                     />
                   </div>
                   <div className="row align-items-center remember">
-                    <input type="checkbox"/>
+                    <input type="checkbox" />
                     <label> Remember Me</label>
                   </div>
                   <div className="form-group">

@@ -18,6 +18,12 @@ import BreastCancer from "./componets/Common/BreastCancer";
 import BrainTumor from "./componets/Common/BrainTumor";
 import Tuberculosis from "./componets/Common/Tuberculosis";
 import Reportpdf from "./PDFworking/Reportpdf";
+import AdminPortal from "./componets/Pages/AdminPortal";
+import DoctorsPortal from "./componets/Pages/DoctorsPortal";
+import PatientPortal from "./componets/Pages/PatientPortal";
+
+//this is for test purpose
+import pdf from "./PDFworking/pdfreport";
 
 function App() {
   return (
@@ -38,6 +44,12 @@ function App() {
 
           <Route path="/signup" component={SignUp} />
 
+          <Route path="/adminportal" component={AdminPortal} />
+
+          <Route path="/doctorportal" component={DoctorsPortal} />
+
+          <Route path="/patientportal" component={PatientPortal} />
+
           <Route
             component={AdminPage}
             // auth={this.state.auth}
@@ -50,7 +62,8 @@ function App() {
 
           <Route path="/tuberculosis" component={Tuberculosis} />
 
-          <Route path="/report" component={Reportpdf} />
+          <Route path="/report2" component={Reportpdf} />
+          <Route path="/report" component={pdf} />
         </PageWrapper>
       </Switch>
     </Router>
