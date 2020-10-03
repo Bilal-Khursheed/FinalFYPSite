@@ -15,18 +15,40 @@ app.post("/add", async (req, res) => {
   const fname = req.body.fullName;
   const lname = req.body.Username;
   const password = req.body.password;
+  const role = req.body.role;
   console.log("email :" + email);
   console.log("name :" + fname);
   console.log("name :" + lname);
   console.log("pass :" + password);
-  const checkdata = `INSERT INTO mid.user(email, fname, lname, pass,status) VALUES ('${email}', '${fname}', '${lname}','${password}',false);`;
-  connection.query(checkdata, (err, results) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send("data added");
-    }
-  });
+  const addUser = `INSERT INTO mid.user(email, fname, lname, pass,status) VALUES ('${email}', '${fname}', '${lname}','${password}',false);`;
+  const addAdmin = `INSERT INTO mid.adminp(email, fname, lname, pass,status) VALUES ('${email}', '${fname}', '${lname}','${password}',false);`;
+  const addDoctor = `INSERT INTO mid.doctor(email, fname, lname, pass,status) VALUES ('${email}', '${fname}', '${lname}','${password}',false);`;
+  if (role === 1) {
+    connection.query(addUser, (err, results) => {
+      if (err) {
+        res.send(err);
+      } else {
+        console.log("user added");
+        res.send("data added");
+      }
+    });
+  } else if (role === 2) {
+    connection.query(addDoctor, (err, results) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send("data added");
+      }
+    });
+  } else if (role === 3) {
+    connection.query(addAdmin, (err, results) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send("data added");
+      }
+    });
+  }
   const htmll = `<p>You have a New contact request </p>
     <h2>Contact Details</h2>
     <ul>
@@ -37,7 +59,7 @@ app.post("/add", async (req, res) => {
     <h3>Message</h3>
     <p>Admin kindly Check the detail and Approve OR cancel request</p>
     <button  >Cancel</button>
-    <a href='http://localhost:3001/users/approve/${email}'>Approve</a>
+    <a href='http://localhost:3001/users/approve?Id=${email}&&role=${role}'>Approve</a>
       `;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -45,7 +67,7 @@ app.post("/add", async (req, res) => {
     secure: false, // true for 465, false for other ports
     auth: {
       user: "balich616@gmail.com", //  user
-      pass: "comsats143", //  password
+      pass: "comsats@123", //  password
     },
   });
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import auth from "../auth/loginAuth";
 const SubStyle = {
   color: "#fec503",
 };
@@ -62,7 +62,10 @@ class portal extends Component {
                   Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
-                <Link class="dropdown-item" to="/login">
+                <Link
+                  class="dropdown-item"
+                  to="/login"
+                >
                   Logout
                 </Link>
               </div>

@@ -9,6 +9,7 @@ class Signup extends Component {
     Username: "",
     password: "",
     navigate: false,
+    role: 1,
   };
 
   handleChange = (e) => {
@@ -21,7 +22,7 @@ class Signup extends Component {
     console.log("email" + this.state.email);
     e.preventDefault();
     //this will assign these variable values from this.state
-    const { email, fullName, Username, password } = this.state;
+    const { email, fullName, Username, password,role } = this.state;
     console.log("name after assigning" + email);
 
     //this will send data to rest api then api will send mail with given data to admin
@@ -31,6 +32,7 @@ class Signup extends Component {
         fullName,
         Username,
         password,
+        role,
       })
       .then((res) => {
         if (res.status === 200) {

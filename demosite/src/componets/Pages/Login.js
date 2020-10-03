@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import App from "../../App";
 import axios from "axios";
+import auth from "../auth/loginAuth";
 
 class Login extends Component {
   constructor(props) {
@@ -32,42 +33,57 @@ class Login extends Component {
     const { email, password } = this.state;
     console.log("name after assigning" + email);
     //this will send data to rest api then api will send mail with given data to admin
-    fetch(`/user/check/?email=${email}&&pass=${password}`)
-      .then((respone) => respone.json())
-      // .then(() => setTimeout(() => this.setState({ navigate: true }), 2000))
-      .then((Result) => {
-        if (Result.status === "success") {
-          if (Result.role === "doctor") {
-            console.log("doctor Login successFully");
-            this.setState({ auth: true });
-            this.setState({ role: 1 });
-            console.log("auth after login is ", this.state.auth);
-            setTimeout(() => this.setState({ navigate: true }), 20);
-          } else if (Result.role === "Admin") {
-            console.log("admin Login successFully");
-            this.setState({ auth: true });
-            this.setState({ role: 2 });
-            console.log("auth after login is ", this.state.auth);
-            setTimeout(() => this.setState({ navigate: true }), 20);
-          } else if (Result.role === "patient") {
-            console.log("patient Login successFully");
-            this.setState({ auth: true });
-            this.setState({ role: 3 });
-            console.log("auth after login is ", this.state.auth);
-            setTimeout(() => this.setState({ navigate: true }), 20);
-          }
-          //console.log("Login successFully");
-          //this.setState({ auth: true });
-          // console.log("auth after login is ", this.state.auth);
-          //setTimeout(() => this.setState({ navigate: true }), 20);
-
-          //<Redirect to="/admin"/>;
+    /*if (auth.login(email, password)) {
+      if (auth.isAuthenticated) {
+        this.setState({ navigate: auth.isnavigation }, { role: auth.isRole });
+      } else {
+        alert("is Auth is not working");
+      }
+    }*/
+    /*if ((await auth.login()) === true) {
+      if (auth.isnavigation === true) {
+        console.log("navigated");
+        if (auth.isRole == 2) {
+          console.log(" roles i s gotted");
+          this.props.history.push("/adminportal");
         } else {
-          alert("Sorrrrrry !!!! Un-authenticated User");
-          window.location.reload(false);
+          console.log("could not found role");
         }
-      })
-      .catch((err) => console.error(err));
+      } else if (auth.isnavigation === false) {
+        console.log("not nei");
+      }
+    }*/
+    if (await auth.login(email, password)) {
+      if (localStorage.getItem("doctor")) {
+        this.setState({ auth: true });
+        this.setState({ role: 1 });
+
+        // console.log("auth after login is ", this.state.auth);
+        setTimeout(() => this.setState({ navigate: true }), 20);
+      } else if (localStorage.getItem("admin")) {
+        this.setState({ auth: true });
+        this.setState({ role: 2 });
+
+        // console.log("auth after login is ", this.state.auth);
+        setTimeout(() => this.setState({ navigate: true }), 20);
+      } else if (localStorage.getItem("patient")) {
+        this.setState({ auth: true });
+        this.setState({ role: 3 });
+
+        // console.log("auth after login is ", this.state.auth);
+        setTimeout(() => this.setState({ navigate: true }), 20);
+      }
+    }
+    /* auth.login(() => {
+      //this.setState({ role: auth.isRole }, { navigate: auth.isnavigation });
+      if (auth.isnavigation) {
+        if (auth.isRole == 2) {
+          this.props.history.push("/adminportal");
+        } else {
+          alert("not working");
+        }
+      }*/
+    //});
   };
 
   //   const form = await axios

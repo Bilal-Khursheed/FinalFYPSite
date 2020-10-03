@@ -4,6 +4,16 @@ import Copyright from "../Common/Copyright";
 
 class AdminPortal extends Component {
     render() {
+      var data = localStorage.getItem("admin");
+      var data2 = JSON.parse(data);
+      var name="";
+      //var detials=JSON.parse( data2.data)
+      var i = "";
+      for (i in data2.data) {
+        name=data2.data[i].fname;
+        name += " "+data2.data[i].lname;
+        console.log(name);
+      }
         return (
           <div>
             <Portal 
@@ -21,7 +31,7 @@ class AdminPortal extends Component {
 
             uploadImage=""
 
-            PersonName="Muhammad Umar"
+            PersonName={name}
             
             />
         <Copyright />

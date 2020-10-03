@@ -2,6 +2,7 @@ const cors = require("cors");
 const express = require("express");
 const bodyParse = require("body-parser");
 const nodemailer = require("nodemailer");
+const account = require("../account/account");
 const app = express();
 
 app.use(cors());
@@ -27,8 +28,10 @@ app.post("/form", async (req, res) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
+      //user: account.email,
       user: "balich616@gmail.com", //  user
-      pass: "comsats143", //  password
+      pass: "comsats@123", //  password
+      //pass: account.password,
     },
   });
 

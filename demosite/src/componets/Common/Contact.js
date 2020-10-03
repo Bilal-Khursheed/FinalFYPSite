@@ -9,34 +9,34 @@ const fields = {
         name: "name",
         elementName: "input",
         type: "text",
-        placeholder: "Your Name"
+        placeholder: "Your Name",
       },
       {
         name: "email",
         elementName: "input",
         type: "email",
-        placeholder: "Your email"
+        placeholder: "Your email",
       },
       {
         name: "phone",
         elementName: "input",
         type: "text",
-        placeholder: "Your Phone Number"
-      }
+        placeholder: "Your Phone Number",
+      },
     ],
     [
       {
         name: "message",
         elementName: "textarea",
         type: "text",
-        placeholder: "Type your message"
-      }
-    ]
-  ]
+        placeholder: "Type your message",
+      },
+    ],
+  ],
 };
 
 const colore = {
-  color: "#fec503"
+  color: "#fec503",
 };
 
 class Contact extends Component {
@@ -46,11 +46,11 @@ class Contact extends Component {
       name: "",
       email: "",
       phone: "",
-      message: ""
+      message: "",
     };
   }
 
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     console.log("name" + this.state.name);
     console.log("email" + this.state.email);
     e.preventDefault();
@@ -62,8 +62,9 @@ class Contact extends Component {
       name,
       email,
       phone,
-      message
+      message,
     });
+    alert("your message is resived");
   };
 
   render() {
@@ -110,9 +111,9 @@ class Contact extends Component {
                                 {...field}
                                 key={i}
                                 value={this.state[field.name]}
-                                onChange={e =>
+                                onChange={(e) =>
                                   this.setState({
-                                    [field.name]: e.target.value
+                                    [field.name]: e.target.value,
                                   })
                                 }
                               />

@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const cors = require("cors");
 const express = require("express");
 const connection = require("../connection/connection");
@@ -40,7 +41,7 @@ app.get("/check", (req, res) => {
             } else {
               return res.json({
                 //will return data in json format if any
-                data: results,
+                data: (results),
                 message: "working and user is allowed  ",
                 status: "success",
                 role: "patient",

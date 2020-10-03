@@ -3,7 +3,7 @@ import PageWrapper from "./componets/PageWrapper";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //private routes
-import PrivateRoute from "./componets/Common/privateRoute/privateRoutes";
+import {ProtectedRoute} from "./componets/Common/privateRoute/privateRoutes";
 
 // Pages
 import Home from "./componets/Pages/Home";
@@ -44,16 +44,16 @@ function App() {
 
           <Route path="/signup" component={SignUp} />
 
-          <Route path="/adminportal" component={AdminPortal} />
+          <ProtectedRoute path="/adminportal" component={AdminPortal} />
 
-          <Route path="/doctorportal" component={DoctorsPortal} />
+          <ProtectedRoute path="/doctorportal" component={DoctorsPortal} />
 
-          <Route path="/patientportal" component={PatientPortal} />
+          <ProtectedRoute path="/patientportal" component={PatientPortal} />
 
           <Route
             component={AdminPage}
             // auth={this.state.auth}
-            path="/admin"
+            path="/adminn/admin"
           />
 
           <Route path="/breastcancer" component={BreastCancer} />
@@ -64,6 +64,7 @@ function App() {
 
           <Route path="/report2" component={Reportpdf} />
           <Route path="/report" component={pdf} />
+          <Route path="*" component={() => "404 PGAE NOT FOUND"} />
         </PageWrapper>
       </Switch>
     </Router>
