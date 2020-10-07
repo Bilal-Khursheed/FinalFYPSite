@@ -18,7 +18,7 @@ class PatientPortal extends Component {
       <div>
         <Portal
           PortalName="Patient Portal"
-          SideBarName="Dashboard"
+          SideBarName="ChangeAccountInfo"
           PersonName={name}
           portallink="/patientportal"
           // Heading 01
@@ -59,16 +59,14 @@ class PatientPortal extends Component {
           // History Doc-Patient
           history1=""
           // Get Report
-          getReport="true"
+          getReport=""
           // Single patient History
           history2=""
           // Change Account Info
-          changeAccInfo=""
-
+          changeAccInfo="true"
 
         />
         <Copyright/>
-
       </div>
     );
   }

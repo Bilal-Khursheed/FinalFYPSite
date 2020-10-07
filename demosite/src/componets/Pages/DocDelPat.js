@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Portal from "../Common/portal";
 import Copyright from "../Common/Copyright";
 
-class DoctorsPortal extends Component {
+class DocDelPat extends Component {
   render() {
     var data = localStorage.getItem("doctor");
     var data2 = JSON.parse(data);
@@ -18,7 +18,7 @@ class DoctorsPortal extends Component {
       <div>
         <Portal
           PortalName="Doctor Portal"
-          SideBarName="GetReport"
+          SideBarName="Delete Patient"
           PersonName={name}
           portallink="/doctorportal"
           // Heading 01
@@ -52,20 +52,18 @@ class DoctorsPortal extends Component {
           linksmall8="#"
 
           // Upload MRI Image 
-          uploadImage="true"
+          uploadImage=""
           //   Add Doc-Patient
           addpatdoc=""
-          addtype="Doctor"
+          addtype="Patient"
           //  Delete Doc-Patient
-          delpatdoc=""
+          delpatdoc="true"
           // History Doc-Patient
           history1=""
            // Get Report
            getReport=""
            // Single patient History
            history2=""
-          //  Chnage Account Info
-          ChangeAccInfo=""
         />
         <Copyright/>
       </div>
@@ -73,4 +71,4 @@ class DoctorsPortal extends Component {
   }
 }
 
-export default DoctorsPortal;
+export default DocDelPat;

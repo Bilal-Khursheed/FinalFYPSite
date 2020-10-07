@@ -18,7 +18,7 @@ class DoctorsPortal extends Component {
       <div>
         <Portal
           PortalName="Doctor Portal"
-          SideBarName="GetReport"
+          SideBarName="Change Account Info"
           PersonName={name}
           portallink="/doctorportal"
           // Heading 01
@@ -52,7 +52,7 @@ class DoctorsPortal extends Component {
           linksmall8="#"
 
           // Upload MRI Image 
-          uploadImage="true"
+          uploadImage=""
           //   Add Doc-Patient
           addpatdoc=""
           addtype="Doctor"
@@ -64,8 +64,9 @@ class DoctorsPortal extends Component {
            getReport=""
            // Single patient History
            history2=""
-          //  Chnage Account Info
-          ChangeAccInfo=""
+           //    Change Account Info
+           changeAccInfo="true"
+
         />
         <Copyright/>
       </div>
