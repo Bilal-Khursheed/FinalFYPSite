@@ -11,6 +11,7 @@ app.use("/user", require("./backend/apis/login")); //use to get login data and w
 app.use("/users", require("./backend/apis/signupmail")); // use to store data in database and also mail data to the admin
 app.use("/api", require("./backend/apis/contactusMail")); //use to mail the that came from contact us
 app.use("/users", require("./backend/apis/signupApprovel")); //admin will approve signup request
+app.use('/users',require("./backend/apis/changePass"));
 
 // port for local host
 const PORT = process.env.PORT || 3001;

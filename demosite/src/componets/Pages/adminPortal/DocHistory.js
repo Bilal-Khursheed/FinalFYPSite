@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Portal from '../Common/portal'
-import Copyright from "../Common/Copyright";
+import Portal from '../../Common/portal'
+import Copyright from "../../Common/Copyright";
+import AdminInfo from "../../userInfo/GetData"
 
-
-class DelPat extends Component {
+class DocHistory extends Component {
     render() {
-        var data = localStorage.getItem("admin");
+        var data = sessionStorage.getItem("admin");
       var data2 = JSON.parse(data);
       var name="";
       //var detials=JSON.parse( data2.data)
@@ -19,8 +19,8 @@ class DelPat extends Component {
             <div>
           <Portal 
            PortalName="Admin Portal"
-           SideBarName="DeletePatient"
-           PersonName={name}
+           SideBarName="DoctorHistory"
+           PersonName={AdminInfo.adminData()}
            portallink="/adminportal"
            
            // Heading 01
@@ -73,14 +73,17 @@ class DelPat extends Component {
          addtype="Doctor"
 
         //  Delete Doc-Patient
-        delpatdoc="true"
-        addtype="Patient"
+        delpatdoc=""
+        addtype="Doctor"
+
+        // Table No. 1
+        history1="true"
+
 
          // Get Report
          getReport=""
          // Single patient History
          history2=""
-
 
           
           />
@@ -89,4 +92,4 @@ class DelPat extends Component {
          </div>
         )}}
 
-        export default DelPat;
+        export default DocHistory;

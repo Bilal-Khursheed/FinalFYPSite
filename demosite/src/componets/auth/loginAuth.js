@@ -25,7 +25,7 @@ class Auth {
         if (Result.status === "success") {
           this.authenticated = true;
           if (Result.role === "doctor") {
-            localStorage.setItem("doctor", JSON.stringify(Result));
+            sessionStorage.setItem("doctor", JSON.stringify(Result));
             console.log("doctor Login successFully");
             //this.setState({ auth: true });
             //this.setState({ role: 1 });
@@ -36,7 +36,8 @@ class Auth {
             setTimeout(() => (this.navigate = true), 20);
             //this.props.history.push("/adminportal");
           } else if (Result.role === "Admin") {
-            localStorage.setItem("admin", JSON.stringify(Result));
+            // localStorage.setItem("admin", JSON.stringify(Result));
+            sessionStorage.setItem("admin", JSON.stringify(Result));
             console.log("admin Login successFully");
             //this.props.history.push("/adminportal");
             //this.setState({ auth: true });
@@ -44,8 +45,8 @@ class Auth {
             this.role = 2;
             // console.log("auth after login is ", this.state.auth);
             setTimeout(() => (this.navigate = true), 20);
-            console.log(localStorage.getItem("admin"));
-            var data = localStorage.getItem("admin");
+            console.log(sessionStorage.getItem("admin"));
+            var data = sessionStorage.getItem("admin");
             var data2 = JSON.parse(data);
             //var detials=JSON.parse( data2.data)
             var i = "";
@@ -84,7 +85,8 @@ class Auth {
   }
 
   logout() {
-    localStorage.clear();
+    // localStorage.clear();
+    sessionStorage.clear();
   }
 
   isAuthenticated() {

@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
-import Portal from '../Common/portal'
-import Copyright from "../Common/Copyright";
+import Portal from '../../Common/portal'
+import Copyright from "../../Common/Copyright";
+import AdminInfo from "../../userInfo/GetData"
 
-
-class AddDoc extends Component {
+class DelDoc extends Component {
     render() {
-        var data = localStorage.getItem("admin");
-      var data2 = JSON.parse(data);
-      var name="";
-      //var detials=JSON.parse( data2.data)
-      var i = "";
-      for (i in data2.data) {
-        name=data2.data[i].fname;
-        name += " "+data2.data[i].lname;
-        console.log(name);}
-
+ 
         return (
             <div>
           <Portal 
            PortalName="Admin Portal"
-           SideBarName="AddDoctor"
-           PersonName={name}
+           SideBarName="DeleteDoctor"
+           PersonName={AdminInfo.adminData()}
            portallink="/adminportal"
            
            // Heading 01
@@ -67,14 +58,21 @@ class AddDoc extends Component {
         //   Upload Image
           uploadImage=""
 
+
         //   Add Doc-Patient
-         addpatdoc="true"
+         addpatdoc=""
          addtype="Doctor"
 
-          // Get Report
-          getReport=""
-          // Single patient History
-          history2=""
+        //  Delete Doc-Patient
+        delpatdoc="true"
+
+        // History Doc-Patient
+        history1=""
+
+         // Get Report
+         getReport=""
+         // Single patient History
+         history2=""
 
 
           
@@ -84,4 +82,4 @@ class AddDoc extends Component {
          </div>
         )}}
 
-        export default AddDoc;
+        export default DelDoc;

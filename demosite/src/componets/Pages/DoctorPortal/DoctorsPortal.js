@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import Portal from "../Common/portal";
-import Copyright from "../Common/Copyright";
-
+import Portal from "../../Common/portal";
+import Copyright from "../../Common/Copyright";
+import DocInfo from "../../userInfo/GetData"
 class DoctorsPortal extends Component {
   render() {
-    var data = localStorage.getItem("doctor");
-    var data2 = JSON.parse(data);
-    var name = "";
-    //var detials=JSON.parse( data2.data)
-    var i = "";
-    for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
-      console.log(name);
-    }
+ 
     return (
       <div>
         <Portal
           PortalName="Doctor Portal"
-          SideBarName="Change Account Info"
-          PersonName={name}
+          SideBarName="GetReport"
+          PersonName={DocInfo.doctorData()}
           portallink="/doctorportal"
           // Heading 01
           mainoption1="Dashboard"
@@ -52,7 +43,7 @@ class DoctorsPortal extends Component {
           linksmall8="#"
 
           // Upload MRI Image 
-          uploadImage=""
+          uploadImage="true"
           //   Add Doc-Patient
           addpatdoc=""
           addtype="Doctor"
@@ -64,9 +55,8 @@ class DoctorsPortal extends Component {
            getReport=""
            // Single patient History
            history2=""
-           //    Change Account Info
-           changeAccInfo="true"
-
+          //  Chnage Account Info
+          ChangeAccInfo=""
         />
         <Copyright/>
       </div>

@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import Portal from "../Common/portal";
-import Copyright from "../Common/Copyright";
-
-class DocViewPatHistory extends Component {
+import Portal from "../../Common/portal";
+import Copyright from "../../Common/Copyright";
+import DocInfo from "../../userInfo/GetData"
+class DoctorsPortal extends Component {
   render() {
-    var data = localStorage.getItem("doctor");
-    var data2 = JSON.parse(data);
-    var name = "";
-    //var detials=JSON.parse( data2.data)
-    var i = "";
-    for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
-      console.log(name);
-    }
+  
     return (
       <div>
         <Portal
           PortalName="Doctor Portal"
-          SideBarName="Patient History"
-          PersonName={name}
+          SideBarName="Change Account Info"
+          PersonName={DocInfo.doctorData()}
           portallink="/doctorportal"
           // Heading 01
           mainoption1="Dashboard"
@@ -55,15 +46,18 @@ class DocViewPatHistory extends Component {
           uploadImage=""
           //   Add Doc-Patient
           addpatdoc=""
-          addtype="Patient"
+          addtype="Doctor"
           //  Delete Doc-Patient
           delpatdoc=""
           // History Doc-Patient
-          history1="true"
+          history1=""
            // Get Report
            getReport=""
            // Single patient History
            history2=""
+           //    Change Account Info
+           changeAccInfo="true"
+
         />
         <Copyright/>
       </div>
@@ -71,4 +65,4 @@ class DocViewPatHistory extends Component {
   }
 }
 
-export default DocViewPatHistory;
+export default DoctorsPortal;

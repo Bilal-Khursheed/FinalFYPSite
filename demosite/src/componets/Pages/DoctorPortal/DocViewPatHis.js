@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import Portal from "../Common/portal";
-import Copyright from "../Common/Copyright";
-
-class DocDelPat extends Component {
+import Portal from "../../Common/portal";
+import Copyright from "../../Common/Copyright";
+import DocInfo from "../../userInfo/GetData"
+class DocViewPatHistory extends Component {
   render() {
-    var data = localStorage.getItem("doctor");
-    var data2 = JSON.parse(data);
-    var name = "";
-    //var detials=JSON.parse( data2.data)
-    var i = "";
-    for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
-      console.log(name);
-    }
+    
     return (
       <div>
         <Portal
           PortalName="Doctor Portal"
-          SideBarName="Delete Patient"
-          PersonName={name}
+          SideBarName="Patient History"
+          PersonName={DocInfo.doctorData()}
           portallink="/doctorportal"
           // Heading 01
           mainoption1="Dashboard"
@@ -57,9 +48,9 @@ class DocDelPat extends Component {
           addpatdoc=""
           addtype="Patient"
           //  Delete Doc-Patient
-          delpatdoc="true"
+          delpatdoc=""
           // History Doc-Patient
-          history1=""
+          history1="true"
            // Get Report
            getReport=""
            // Single patient History
@@ -71,4 +62,4 @@ class DocDelPat extends Component {
   }
 }
 
-export default DocDelPat;
+export default DocViewPatHistory;

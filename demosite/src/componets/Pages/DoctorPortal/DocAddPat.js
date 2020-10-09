@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import Portal from "../Common/portal";
-import Copyright from "../Common/Copyright";
-
+import Portal from "../../Common/portal";
+import Copyright from "../../Common/Copyright";
+import DocInfo from "../../userInfo/GetData"
 class DocAddPat extends Component {
   render() {
-    var data = localStorage.getItem("doctor");
-    var data2 = JSON.parse(data);
-    var name = "";
-    //var detials=JSON.parse( data2.data)
-    var i = "";
-    for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
-      console.log(name);
-    }
+   
     return (
       <div>
         <Portal
           PortalName="Doctor Portal"
           SideBarName="AddPatient"
-          PersonName={name}
+          PersonName={DocInfo.doctorData()}
           portallink="/doctorportal"
           // Heading 01
           mainoption1="Dashboard"

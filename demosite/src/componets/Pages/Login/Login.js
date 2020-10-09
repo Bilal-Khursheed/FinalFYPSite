@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
-import App from "../../App";
+import App from "../../../App";
 import axios from "axios";
-import auth from "../auth/loginAuth";
+import auth from "../../auth/loginAuth";
 
 class Login extends Component {
   constructor(props) {
@@ -54,19 +54,19 @@ class Login extends Component {
       }
     }*/
     if (await auth.login(email, password)) {
-      if (localStorage.getItem("doctor")) {
+      if (sessionStorage.getItem("doctor")) {
         this.setState({ auth: true });
         this.setState({ role: 1 });
 
         // console.log("auth after login is ", this.state.auth);
         setTimeout(() => this.setState({ navigate: true }), 20);
-      } else if (localStorage.getItem("admin")) {
+      } else if (sessionStorage.getItem("admin")) {
         this.setState({ auth: true });
         this.setState({ role: 2 });
 
         // console.log("auth after login is ", this.state.auth);
         setTimeout(() => this.setState({ navigate: true }), 20);
-      } else if (localStorage.getItem("patient")) {
+      } else if (sessionStorage.getItem("patient")) {
         this.setState({ auth: true });
         this.setState({ role: 3 });
 

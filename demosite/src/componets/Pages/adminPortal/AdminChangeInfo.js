@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import Portal from "../Common/portal";
-import Copyright from "../Common/Copyright";
-
+import Portal from "../../Common/portal";
+import Copyright from "../../Common/Copyright";
+import AdminInfo from "../../userInfo/GetData"
 class AdminPortal extends Component {
   render() {
-    var data = localStorage.getItem("admin");
-    var data2 = JSON.parse(data);
-    var name = "";
-    //var detials=JSON.parse( data2.data)
-    var i = "";
-    for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
-      console.log(name);
-    }
+ 
     return (
       <div>
         <Portal
           PortalName="Admin Portal"
           SideBarName="ChangeAccountInfo"
-          PersonName={name}
+          PersonName={AdminInfo.adminData()}
           portallink="/adminportal"
 
           // Heading 01

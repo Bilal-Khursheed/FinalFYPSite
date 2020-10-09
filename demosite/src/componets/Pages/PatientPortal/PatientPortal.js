@@ -1,25 +1,16 @@
 import React, { Component } from "react";
-import Portal from "../Common/portal";
-import Copyright from "../Common/Copyright";
-
-class ViewReport extends Component {
+import Portal from "../../Common/portal";
+import Copyright from "../../Common/Copyright";
+import patientname from "../../userInfo/GetData"
+class PatientPortal extends Component {
   render() {
-    var data = localStorage.getItem("patient");
-    var data2 = JSON.parse(data);
-    var name = "";
-    //var detials=JSON.parse( data2.data)
-    var i = "";
-    for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
-      console.log(name);
-    }
+ 
     return (
       <div>
         <Portal
           PortalName="Patient Portal"
-          SideBarName="ViewReport"
-          PersonName={name}
+          SideBarName="Dashboard"
+          PersonName={patientname.patientData()}
           portallink="/patientportal"
           // Heading 01
           mainoption1="Report"
@@ -65,11 +56,13 @@ class ViewReport extends Component {
           // Change Account Info
           changeAccInfo=""
 
+
         />
         <Copyright/>
+
       </div>
     );
   }
 }
 
-export default ViewReport;
+export default PatientPortal;

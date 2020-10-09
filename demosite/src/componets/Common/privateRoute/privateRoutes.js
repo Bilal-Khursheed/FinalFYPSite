@@ -5,12 +5,12 @@ import { Route, Redirect } from "react-router-dom";
   <Route
     {...rest}
     render={(props) => 
-      localStorage.getItem("admin") ? (
+      sessionStorage.getItem("admin") ? (
         <Cmp {...props} />
       ) : 
-      localStorage.getItem("doctor")?
+      sessionStorage.getItem("doctor")?
       <Cmp {...props}/>:
-      localStorage.getItem("patient")?
+      sessionStorage.getItem("patient")?
       <Cmp {...props}/>:
       
         <Redirect to="/login" />

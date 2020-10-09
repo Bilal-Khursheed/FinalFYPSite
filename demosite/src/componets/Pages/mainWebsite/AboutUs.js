@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Header from '../Common/Header';
-import About from '../Common/About'
-import Footer from "../Common/Footer";
-import image from '../assests/img/MI-Teaser.png'
-import Copyright from '../Common/Copyright';
+import Header from '../../Common/Header';
+import About from '../../Common/About'
+import Footer from "../../Common/Footer";
+import image from '../../assests/img/MI-Teaser.png'
+import Copyright from '../../Common/Copyright';
 
 class AboutUs extends Component {
     render() {

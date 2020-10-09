@@ -1,26 +1,17 @@
 import React, { Component } from 'react';
-import Portal from '../Common/portal'
-import Copyright from "../Common/Copyright";
+import Portal from '../../Common/portal'
+import Copyright from "../../Common/Copyright";
+import AdminInfo from "../../userInfo/GetData"
 
-
-class DocHistory extends Component {
+class AddPat extends Component {
     render() {
-        var data = localStorage.getItem("admin");
-      var data2 = JSON.parse(data);
-      var name="";
-      //var detials=JSON.parse( data2.data)
-      var i = "";
-      for (i in data2.data) {
-        name=data2.data[i].fname;
-        name += " "+data2.data[i].lname;
-        console.log(name);}
-
+   
         return (
             <div>
           <Portal 
            PortalName="Admin Portal"
-           SideBarName="DoctorHistory"
-           PersonName={name}
+           SideBarName="AddPatient"
+           PersonName={AdminInfo.adminData()}
            portallink="/adminportal"
            
            // Heading 01
@@ -34,7 +25,7 @@ class DocHistory extends Component {
  
            showOption3="true"
            smalloption3="Doctor History"
-           linksmall3="dochistory"
+           linksmall3="/dochistory"
  
            // Heading 02
            mainoption2="Manage Patients"
@@ -49,7 +40,7 @@ class DocHistory extends Component {
  
            showOption6="true"
            smalloption6="Patient History"
-           linksmall6="pathistory"
+           linksmall6="/pathistory"
  
  
            // Heading 03
@@ -67,23 +58,18 @@ class DocHistory extends Component {
         //   Upload Image
           uploadImage=""
 
-
         //   Add Doc-Patient
-         addpatdoc=""
-         addtype="Doctor"
+         addpatdoc="true"
+         addtype="Patient"
 
-        //  Delete Doc-Patient
-        delpatdoc=""
-        addtype="Doctor"
+          // Get Report
+          getReport=""
 
-        // Table No. 1
-        history1="true"
+          // History of all patients
+          history1=""
+          // Single patient History
+          history2=""
 
-
-         // Get Report
-         getReport=""
-         // Single patient History
-         history2=""
 
           
           />
@@ -92,4 +78,4 @@ class DocHistory extends Component {
          </div>
         )}}
 
-        export default DocHistory;
+        export default AddPat;
