@@ -1,28 +1,49 @@
-import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
-
 class GetEmail {
-  
-   email() {
-    var data = localStorage.getItem("admin");
-    var email1="bila";
-    var role=0;
-    if(data){
-    var data2 = JSON.parse(data);
-    
-    //var detials=JSON.parse( data2.data)
-    var i = "";
-    for (i in data2.data) {
-      email1=data2.data[i].email;
-     
-      console.log(email1);
-      role=1;
-      return [email1,role];
+  email() {
+    var admin = sessionStorage.getItem("admin");
+    var doctor = sessionStorage.getItem("doctor");
+    var patient = sessionStorage.getItem("patient");
+    var email1 = "";
+    var role = 0;
+    if (admin!= undefined) {
+      var data2 = JSON.parse(admin);
+
+      //var detials=JSON.parse( data2.data)
+      var i = "";
+      for (i in data2.data) {
+        email1 = data2.data[i].email;
+
+        console.log(email1);
+        role = 1;
+        return [email1, role];
+      }
+    } //end of if
+    else if (doctor != null) {
+      var data2 = JSON.parse(doctor);
+
+      //var detials=JSON.parse( data2.data)
+      var i = "";
+      for (i in data2.data) {
+        email1 = data2.data[i].email;
+
+        console.log(email1);
+        role = 2;
+        return [email1, role];
+      }
+    } else if(patient != null){
+      var data2 = JSON.parse(patient);
+
+      //var detials=JSON.parse( data2.data)
+      var i = "";
+      for (i in data2.data) {
+        email1 = data2.data[i].email;
+
+        console.log(email1);
+        role = 3;
+        return [email1, role];
+      }
     }
-}//end of if
-else{
-return email1
+  }
 }
-  }}
 
 export default new GetEmail();

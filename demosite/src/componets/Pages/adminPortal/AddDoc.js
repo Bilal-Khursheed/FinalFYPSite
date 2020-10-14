@@ -11,7 +11,7 @@ class AddDoc extends Component {
           <Portal 
            PortalName="Admin Portal"
            SideBarName="AddDoctor"
-           PersonName={AdminInfo.adminData()}
+           PersonName={AdminInfo.adminData().toUpperCase()}
            portallink="/adminportal"
            
            // Heading 01

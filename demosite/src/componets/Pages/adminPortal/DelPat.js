@@ -20,7 +20,7 @@ class DelPat extends Component {
           <Portal 
            PortalName="Admin Portal"
            SideBarName="DeletePatient"
-           PersonName={AdminInfo.adminData()}
+           PersonName={AdminInfo.adminData().toUpperCase()}
            portallink="/adminportal"
            
            // Heading 01

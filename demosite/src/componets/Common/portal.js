@@ -5,7 +5,9 @@ import Auth from "../auth/loginAuth";
 import IdleTimer from "react-idle-timer";
 import GetEmail from "../userInfo/GetEmail";
 import changepass from "../chnagedata/changePass";
+import allDoc from "../doctorData/GetAllDoc";
 import $ from "jquery";
+
 const SubStyle = {
   color: "#fec503",
 };
@@ -25,6 +27,16 @@ class portal extends Component {
       oldPassword: "",
       newPassword: "",
       role: "",
+
+      //all doc from database
+      docname: "",
+
+      //only run one time
+
+      v:0,
+
+      //display all doctors
+      tableName: ""
     };
     this.idleTimer = null;
     this.onAction = this._onAction.bind(this);
@@ -60,6 +72,32 @@ class portal extends Component {
 
     changepass.changePassword(email, oldPassword, newPassword, role);
   };
+
+  alldoctors = async (e) => {
+    var alldoctors = await allDoc.allDoc();
+    // var name=JSON.parse(alldoctors)
+    var length=JSON.stringify(alldoctors.names.length);
+    console.log("data of the doctor" + length);
+    var x; var y=length;
+    
+    if(this.state.v===0 ){
+    for( x=0; x<length; x++){
+      console.log("working in for loop" + this.state.tableName)
+    $("#tabledata").prepend(
+      `<tr><th scope="row">`+y+`</th><td>`+alldoctors.names[x].toUpperCase()+`</td><td>`+alldoctors.emails[x]+`</td><td>`+alldoctors.cnic[x]+`</td>
+      <td>gawo chak 18, Mirpur, AJK</td>
+    </tr>`)
+      y--
+      this.setState({v:1})
+    }
+  }
+   /* do {
+      $("#tabledata").prepend(
+        '<tr><th scope="row">1</th><td>Muhammad Umar</td><td>umarnazaket@gmail.com</td>'
+      
+    } while (alldoctors.names.length);*/
+    //this.setState({ docname: alldoctors[1] });
+  };
   _onAction(e) {
     console.log("user did something", e);
     this.setState({ isTimedOut: false });
@@ -67,11 +105,6 @@ class portal extends Component {
 
   _onActive(e) {
     console.log("user is active", e);
-    this.setState({ isTimedOut: false });
-  }
-  _onUnLoad(e) {
-    console.log("user is unload", e);
-    Auth.logout();
     this.setState({ isTimedOut: false });
   }
 
@@ -98,8 +131,8 @@ class portal extends Component {
       // Clear localStorage
       Auth.logout();
     };*/
- 
-  /*window.onbeforeunload = function (e) {
+
+    /*window.onbeforeunload = function (e) {
     window.onunload = function () {
             window.localStorage.isMySessionActive = "false";
            console.log("working on onunload")
@@ -151,6 +184,20 @@ window.onload = function () {
       });
 
       $("div.setup-panel div a.btn-primary").trigger("click");
+
+      // Add active state to sidbar nav links
+      var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+      $("#layoutSidenav_nav .sb-sidenav a.nav-link").each(function () {
+        if (this.href === path) {
+          $(this).addClass("active");
+        }
+      });
+
+      // Toggle the side navigation
+      $("#sidebarToggle").on("click", function (e) {
+        e.preventDefault();
+        $("body").toggleClass("sb-sidenav-toggled");
+      });
     });
 
     return (
@@ -160,25 +207,22 @@ window.onload = function () {
           ref={(ref) => {
             this.idleTimer = ref;
           }}
-          element={document}
-          onActive={this.onActive}
+          //element={document}
+          //onActive={this.onActive}
           onIdle={this.onIdle}
-          onAction={this.onAction}
-          debounce={250}
-          timeout={this.state.timeout}
+         // onAction={this.onAction}
+          // debounce={250}
+          // timeout={this.state.timeout}
         />
-        <body className="sb-nav-fixed">
+        <body className="sb-nav-fixed" >
           <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <Link className="navbar-brand" to={this.props.portallink}>
               {this.props.PortalName}
             </Link>
-            {/* <button
-            className="btn btn-link btn-sm order-1 order-lg-0"
-            id="sidebarToggle"
-            to="#"
-          >
-            <i className="fas fa-bars"></i>
-          </button> */}
+
+            <a href="#" id="sidebarToggle" data-activates="sidenavAccordion">
+              <i class="fas fa-bars"></i>
+            </a>
 
             <form className="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
               <div className="input-group">
@@ -222,11 +266,11 @@ window.onload = function () {
                 </Link> */}
                   {/* <div className="dropdown-divider"></div> */}
                   <Link
-                    className="navbar-nav ml-auto text-light"
                     to="/login"
+                    class="navbar-nav ml-auto btn btn-warning btn-lg bg-dark text-light "
                     onClick={Auth.logout}
                   >
-                    <h5>Logout</h5>
+                    <span class="fas fa-sign-out-alt fa-lg pl-2">Log Out</span>
                   </Link>
                 </div>
               </li>
@@ -535,7 +579,8 @@ window.onload = function () {
                       {this.props.history1 && (
                         <div>
                           <h2>{this.props.addtype} List</h2>
-                          <table class="table table-hover table-dark">
+                          <table class="table table-hover table-dark"  onLoad=
+                          {this.alldoctors()}>
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
@@ -545,8 +590,8 @@ window.onload = function () {
                                 <th scope="col">Address</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
+                            <tbody id="tabledata">
+                             {/* <tr>
                                 <th scope="row">1</th>
                                 <td>Muhammad Umar</td>
                                 <td>umarnazaket@gmail.com</td>
@@ -569,7 +614,7 @@ window.onload = function () {
                                   House No. 123, Mohalla 234, Satellite Town,
                                   RWP
                                 </td>
-                              </tr>
+                             </tr>*/}
                             </tbody>
                           </table>
                         </div>
@@ -814,7 +859,7 @@ window.onload = function () {
                                         name="oldPassword"
                                         class="form-control"
                                         placeholder="Enter Old Password"
-                                       // onChange={this.handleChange}
+                                        onChange={this.handleChange}
                                       />
                                     </div>
                                     <div class="form-group">
@@ -828,7 +873,7 @@ window.onload = function () {
                                         name="newPassword"
                                         class="form-control"
                                         placeholder="Enter New Password"
-                                        // onChange={this.handleChange}
+                                        onChange={this.handleChange}
                                       />
                                     </div>
                                     <div class="form-group">
@@ -842,7 +887,7 @@ window.onload = function () {
                                         required="required"
                                         class="form-control"
                                         placeholder="Confirm Password"
-                                       // onChange={this.handleChange}
+                                        onChange={this.handleChange}
                                       />
                                     </div>
 

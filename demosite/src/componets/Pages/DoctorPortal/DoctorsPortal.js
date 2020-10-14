@@ -10,7 +10,7 @@ class DoctorsPortal extends Component {
         <Portal
           PortalName="Doctor Portal"
           SideBarName="GetReport"
-          PersonName={DocInfo.doctorData()}
+          PersonName={DocInfo.doctorData().toUpperCase()}
           portallink="/doctorportal"
           // Heading 01
           mainoption1="Dashboard"

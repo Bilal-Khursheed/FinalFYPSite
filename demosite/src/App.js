@@ -3,7 +3,7 @@ import PageWrapper from "./componets/PageWrapper";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //private routes
-import {ProtectedRoute} from "./componets/Common/privateRoute/privateRoutes";
+import { ProtectedRoute } from "./componets/Common/privateRoute/privateRoutes";
 
 // Pages
 import Home from "./componets/Pages/mainWebsite/Home";
@@ -21,20 +21,23 @@ import Reportpdf from "./PDFworking/Reportpdf";
 import AdminPortal from "./componets/Pages/adminPortal/AdminPortal";
 import DoctorsPortal from "./componets/Pages/DoctorPortal/DoctorsPortal";
 import PatientPortal from "./componets/Pages/PatientPortal/PatientPortal";
-import AddDoc from "./componets/Pages/adminPortal/AddDoc"
-import AddPat from "./componets/Pages/adminPortal/AddPat"
-import DelDoc from "./componets/Pages/adminPortal/DelDoc"
-import DelPat from "./componets/Pages/adminPortal/DelPat"
-import DocHistory from "./componets/Pages/adminPortal/DocHistory"
-import PatHistory from "./componets/Pages/adminPortal/PatHistory"
-import PviewReport from "./componets/Pages/PatientPortal/PviewReport"
-import Viewhistory from "./componets/Pages/PatientPortal/ViewHistory"
-import DocAddPat from "./componets/Pages/DoctorPortal/DocAddPat"
-import DocDelPat from "./componets/Pages/DoctorPortal/DocDelPat"
-import docviewpathistory from "./componets/Pages/DoctorPortal/DocViewPatHis"
-import adminAccInfo from "./componets/Pages/adminPortal/AdminChangeInfo"
-import DoctorAccInfo from "./componets/Pages/DoctorPortal/DocChangeInfo"
-import PatientAccInfo from "./componets/Pages/PatientPortal/PatientChangeInfo"
+import AddDoc from "./componets/Pages/adminPortal/AddDoc";
+import AddPat from "./componets/Pages/adminPortal/AddPat";
+import DelDoc from "./componets/Pages/adminPortal/DelDoc";
+import DelPat from "./componets/Pages/adminPortal/DelPat";
+import DocHistory from "./componets/Pages/adminPortal/DocHistory";
+import PatHistory from "./componets/Pages/adminPortal/PatHistory";
+import PviewReport from "./componets/Pages/PatientPortal/PviewReport";
+import Viewhistory from "./componets/Pages/PatientPortal/ViewHistory";
+import DocAddPat from "./componets/Pages/DoctorPortal/DocAddPat";
+import DocDelPat from "./componets/Pages/DoctorPortal/DocDelPat";
+import docviewpathistory from "./componets/Pages/DoctorPortal/DocViewPatHis";
+import adminAccInfo from "./componets/Pages/adminPortal/AdminChangeInfo";
+import DoctorAccInfo from "./componets/Pages/DoctorPortal/DocChangeInfo";
+import PatientAccInfo from "./componets/Pages/PatientPortal/PatientChangeInfo";
+import Error404 from "./componets/Pages/404page/Error404";
+
+
 
 //this is for test purpose
 import pdf from "./PDFworking/pdfreport";
@@ -45,6 +48,7 @@ function App() {
       <Switch>
         <PageWrapper>
           <Route exact={true} path="/" component={Home} />
+          
 
           <Route path="/about" component={AboutUs} />
 
@@ -56,7 +60,11 @@ function App() {
 
           <Route path="/login" component={Login} />
 
-          <Route path="/signup" component={SignUp} />
+          <Route exact={true} path="/signup" component={SignUp} />
+
+          {
+            // <Route path="/error" component={Error404} />
+          }
 
           <ProtectedRoute path="/adminportal" component={AdminPortal} />
 
@@ -84,15 +92,16 @@ function App() {
 
           <ProtectedRoute path="/docdelpat" component={DocDelPat} />
 
-          <ProtectedRoute path="/docviewpathistory" component={docviewpathistory} />
+          <ProtectedRoute
+            path="/docviewpathistory"
+            component={docviewpathistory}
+          />
 
           <ProtectedRoute path="/adminaccinfo" component={adminAccInfo} />
 
           <ProtectedRoute path="/doctoraccinfo" component={DoctorAccInfo} />
 
           <ProtectedRoute path="/patientaccinfo" component={PatientAccInfo} />
-
-         
 
           <Route
             component={AdminPage}
@@ -108,7 +117,7 @@ function App() {
 
           <Route path="/report2" component={Reportpdf} />
           <Route path="/report" component={pdf} />
-          <Route path="*" component={() => "404 PAGE NOT FOUND"} />
+          <Route path="error" component={Error404} />
         </PageWrapper>
       </Switch>
     </Router>

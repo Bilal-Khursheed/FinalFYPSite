@@ -11,7 +11,7 @@ class DelDoc extends Component {
           <Portal 
            PortalName="Admin Portal"
            SideBarName="DeleteDoctor"
-           PersonName={AdminInfo.adminData()}
+           PersonName={AdminInfo.adminData().toUpperCase()}
            portallink="/adminportal"
            
            // Heading 01

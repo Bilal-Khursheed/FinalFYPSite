@@ -20,7 +20,7 @@ class DocHistory extends Component {
           <Portal 
            PortalName="Admin Portal"
            SideBarName="DoctorHistory"
-           PersonName={AdminInfo.adminData()}
+           PersonName={AdminInfo.adminData().toUpperCase()}
            portallink="/adminportal"
            
            // Heading 01

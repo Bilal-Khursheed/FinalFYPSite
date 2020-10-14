@@ -2,16 +2,18 @@ import React, { Component } from "react";
 import Portal from "../../Common/portal";
 import Copyright from "../../Common/Copyright";
 import UserInfo from "../../userInfo/GetData";
+import alldoc from "../../doctorData/GetAllDoc"
 
 class AdminPortal extends Component {
   render() {
-  
+    {alldoc.allDoc()}
     return (
+     
       <div>
         <Portal
           PortalName="Admin Portal"
           SideBarName="Dashboard"
-          PersonName={UserInfo.adminData()}
+          PersonName={UserInfo.adminData().toUpperCase()}
           portallink="/adminportal"
 
           // Heading 01

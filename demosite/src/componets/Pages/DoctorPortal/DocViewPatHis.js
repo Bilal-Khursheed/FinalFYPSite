@@ -10,7 +10,7 @@ class DocViewPatHistory extends Component {
         <Portal
           PortalName="Doctor Portal"
           SideBarName="Patient History"
-          PersonName={DocInfo.doctorData()}
+          PersonName={DocInfo.doctorData().toUpperCase()}
           portallink="/doctorportal"
           // Heading 01
           mainoption1="Dashboard"

@@ -11,7 +11,7 @@ class ViewHistory extends Component {
         <Portal
           PortalName="Patient Portal"
           SideBarName="View History"
-          PersonName={patientname.patientData()}
+          PersonName={patientname.patientData().toUpperCase()}
           portallink="/patientportal"
           // Heading 01
           mainoption1="Report"

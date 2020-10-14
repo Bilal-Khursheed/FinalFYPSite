@@ -54,7 +54,7 @@ class Auth {
               console.log(data2.data[i].fname);
             }
           } else if (Result.role === "patient") {
-            localStorage.setItem("patient", JSON.stringify(Result));
+            sessionStorage.setItem("patient", JSON.stringify(Result));
             console.log("patient Login successFully");
             //this.setState({ auth: true });
             //this.setState({ role: 3 });

@@ -69,6 +69,7 @@ class Login extends Component {
       } else if (sessionStorage.getItem("patient")) {
         this.setState({ auth: true });
         this.setState({ role: 3 });
+        console.log("patient role" + this.state.role)
 
         // console.log("auth after login is ", this.state.auth);
         setTimeout(() => this.setState({ navigate: true }), 20);
