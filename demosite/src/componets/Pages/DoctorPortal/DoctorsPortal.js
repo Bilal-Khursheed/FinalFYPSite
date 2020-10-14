@@ -43,7 +43,7 @@ class DoctorsPortal extends Component {
           linksmall8="#"
 
           // Upload MRI Image 
-          uploadImage="true"
+          uploadImage=""
           //   Add Doc-Patient
           addpatdoc=""
           addtype="Doctor"
@@ -57,6 +57,8 @@ class DoctorsPortal extends Component {
            history2=""
           //  Chnage Account Info
           ChangeAccInfo=""
+          // upload File MRI to get Gifs
+          FileUpload="true"
         />
         <Copyright/>
       </div>

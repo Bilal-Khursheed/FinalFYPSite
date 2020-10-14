@@ -14,12 +14,12 @@ app.get("/changepass", (req, res) => {
   console.log("new pass working" + newPassword);
   
 
-  const verifyDoctor = `SELECT * FROM mid.doctor where email='${email}' and pass='${oldPassword}';`;
-  const verifypatient = `SELECT * FROM mid.user where email='${email}' and pass='${oldPassword}';`;
-  const verifyAdmin = `SELECT * FROM mid.adminp where email='${email}' and pass='${oldPassword}';`;
-  const changePatientPass= `update mid.user set pass='${newPassword}' where email='${email}';`;
-  const changeDoctorPass= `update mid.doctor set pass='${newPassword}' where email='${email}';`;
-  const changeAdminPass= `update mid.adminp set pass='${newPassword}' where email='${email}';`;
+  const verifyDoctor = `SELECT * FROM mid.doctor where email='${email}' and password='${oldPassword}';`;
+  const verifypatient = `SELECT * FROM mid.patient where email='${email}' and password='${oldPassword}';`;
+  const verifyAdmin = `SELECT * FROM mid.adminp where email='${email}' and password='${oldPassword}';`;
+  const changePatientPass= `update mid.user set password='${newPassword}' where email='${email}';`;
+  const changeDoctorPass= `update mid.doctor set password='${newPassword}' where email='${email}';`;
+  const changeAdminPass= `update mid.adminp set password='${newPassword}' where email='${email}';`;
   if(role==1){//for user(patient)
     connection.query(verifyAdmin, (err, results) => {
         console.log("length" + results.length)

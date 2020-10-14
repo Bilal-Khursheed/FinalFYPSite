@@ -51,7 +51,7 @@ class Auth {
             //var detials=JSON.parse( data2.data)
             var i = "";
             for (i in data2.data) {
-              console.log(data2.data[i].fname);
+              console.log(data2.data[i].F_Name);
             }
           } else if (Result.role === "patient") {
             sessionStorage.setItem("patient", JSON.stringify(Result));

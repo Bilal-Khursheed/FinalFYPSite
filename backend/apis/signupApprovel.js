@@ -23,7 +23,7 @@ app.get("/approve", async (req, res) => {
   console.log("email : " + Id);
   console.log("role : " + role);
 
-  const updateUser = `update mid.user set status=true where email='${Id}';`;
+  const updateUser = `update mid.patient set status=true where email='${Id}';`;
   const updateDoctor = `update mid.doctor set status=true where email='${Id}';`;
   const UpdateAdmin = `update mid.adminp set status=true where email='${Id}';`;
   if (role === 1) {

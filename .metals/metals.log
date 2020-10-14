@@ -1,0 +1,6 @@
+2020.10.13 22:02:24 INFO  started: Metals version 0.9.4 in workspace 'C:\Users\DELL\Desktop\React Work\yfp v3\demoProject' for client vscode.
+2020.10.13 22:02:25 INFO  time: initialize in 1.39s
+2020.10.13 22:02:29 WARN  no build tool detected in workspace 'C:\Users\DELL\Desktop\React Work\yfp v3\demoProject'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. 
+Oct 14, 2020 11:10:53 AM org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+INFO: Unsupported notification method: $/setTraceNotification
+2020.10.14 20:14:21 INFO  shutting down Metals

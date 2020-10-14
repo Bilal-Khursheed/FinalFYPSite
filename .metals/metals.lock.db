@@ -1,0 +1,6 @@
+#FileLock
+#Tue Oct 13 22:02:29 PKT 2020
+hostName=localhost
+id=17522e9cc9769845066c04130b9641a00a18e3ef712
+method=file
+server=localhost\:49999

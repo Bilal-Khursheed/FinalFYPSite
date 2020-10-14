@@ -13,11 +13,15 @@ class GetAllDoc {
         var i,
           j = 0;
         for (i in Result.data) {
-          name[j] = Result.data[i].fname;
-          name[j] += " " + Result.data[i].lname;
-          email[j] = Result.data[i].email;
-          cnic[j] = Result.data[i].cnic;
-          //address = Result.data[i].adress;
+          name[j] = Result.data[i].F_Name;
+          name[j] += " " + Result.data[i].L_Name;
+          email[j] = Result.data[i].Email;
+          cnic[j] = Result.data[i].CNIC;
+          address[j] = Result.data[i].street;
+          address[j] += ", " +Result.data[i].City;
+          address[j] += ", " +Result.data[i].State;
+          address[j] += ", " +Result.data[i].Country;
+          //address = Result.data[i].adress;Country
           console.log(name[j], email[j], cnic[j]);
           j++;
         }
@@ -25,13 +29,14 @@ class GetAllDoc {
           names: name,
           emails: email,
           cnic: cnic,
+          address:address
         };
 
         //console.log("obj value" + user.email[1]);
 
         //allData = Result;
       });
-    console.log("here is all datajosaboif" );
+    console.log("here is all data");
     return user;
   }
 }

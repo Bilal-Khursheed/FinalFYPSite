@@ -11,20 +11,30 @@ app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({ extended: false }));
 
 app.post("/add", async (req, res) => {
-  const email = req.body.email;
-  const fname = req.body.fullName;
-  const lname = req.body.Username;
-  const password = req.body.password;
+  
+  const CNIC = req.body.CNIC;
+  const Email = req.body.Email;
+  const F_Name = req.body.F_Name;
+  const L_Name = req.body.L_Name;
+  const Phone_No = req.body.Phone_No;
+  const Password = req.body.Password;
+  const Hospital = req.body.Hospital;
+  const Address = req.body.Address;
+  const City = req.body.City;
+  const State = req.body.State;
+  const Country = req.body.Country;
+  const Zip_code = req.body.Zip_code;
+  const DOB=req.body.DOB;
   const role = req.body.role;
-  console.log("email :" + email);
-  console.log("name :" + fname);
-  console.log("name :" + lname);
-  console.log("pass :" + password);
-  const addUser = `INSERT INTO mid.user(email, fname, lname, pass,status) VALUES ('${email}', '${fname}', '${lname}','${password}',false);`;
-  const addAdmin = `INSERT INTO mid.adminp(email, fname, lname, pass,status) VALUES ('${email}', '${fname}', '${lname}','${password}',false);`;
-  const addDoctor = `INSERT INTO mid.doctor(email, fname, lname, pass,status) VALUES ('${email}', '${fname}', '${lname}','${password}',false);`;
+  console.log("email :" + Email);
+  console.log("name :" + F_Name);
+  console.log("name :" + L_Name);
+  console.log("pass :" + Password);
+  const addUser = `INSERT INTO mid.patient(cnic,f_name, l_name, Email,dob, Phone_no, Password, street, city, state, country, zip_code) VALUES ('${CNIC}', '${F_Name}','${L_Name}', '${Email}',${DOB},'${Phone_No}','${Password}', '${Address}', '${City}', '${State}', '${Country}', '${Zip_code}');`;
+  const addAdmin = `INSERT INTO mid.adminp(cnic,f_name, l_name, Email, Phone_no, Password, street, city, state, country, zip_code) VALUES ('${CNIC}', '${F_Name}','${L_Name}', '${Email}','${Phone_No}','${Password}', '${Address}', '${City}', '${State}', '${Country}', '${Zip_code}');`;
+  const addDoctor = `INSERT INTO mid.doctor(cnic,f_name, l_name, Email, Phone_no, Password,status,hospital, street, city, state, country, zip_code) VALUES ('${CNIC}', '${F_Name}','${L_Name}', '${Email}','${Phone_No}','${Password}',false,'${Hospital}', '${Address}', '${City}', '${State}', '${Country}', '${Zip_code}');`;
   if (role === 1) {
-    connection.query(addUser, (err, results) => {
+    connection.query(addDoctor, (err, results) => {
       if (err) {
         res.send(err);
       } else {
@@ -52,14 +62,14 @@ app.post("/add", async (req, res) => {
   const htmll = `<p>You have a New contact request </p>
     <h2>Contact Details</h2>
     <ul>
-      <li>Name: ${fname}</li>
-      <li>Email: ${email}</li>
-      <li>UserName: ${lname}</li>
+      <li>Name: ${F_Name}</li>
+      <li>Email: ${Email}</li>
+      <li>UserName: ${L_Name}</li>
     </ul>
     <h3>Message</h3>
     <p>Admin kindly Check the detail and Approve OR cancel request</p>
     <button  >Cancel</button>
-    <a href='http://localhost:3001/users/approve?Id=${email}&&role=${role}'>Approve</a>
+    <a href='http://localhost:3001/users/approve?Id=${Email}&&role=${role}'>Approve</a>
       `;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",

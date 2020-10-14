@@ -7,6 +7,7 @@ import GetEmail from "../userInfo/GetEmail";
 import changepass from "../chnagedata/changePass";
 import allDoc from "../doctorData/GetAllDoc";
 import $ from "jquery";
+import FileUpload from "../Common/FileUpload"
 
 const SubStyle = {
   color: "#fec503",
@@ -85,7 +86,7 @@ class portal extends Component {
       console.log("working in for loop" + this.state.tableName)
     $("#tabledata").prepend(
       `<tr><th scope="row">`+y+`</th><td>`+alldoctors.names[x].toUpperCase()+`</td><td>`+alldoctors.emails[x]+`</td><td>`+alldoctors.cnic[x]+`</td>
-      <td>gawo chak 18, Mirpur, AJK</td>
+      <td>`+alldoctors.address[x]+`</td>
     </tr>`)
       y--
       this.setState({v:1})
@@ -905,6 +906,10 @@ window.onload = function () {
                         </div>
                       )}
                       {/* End Of Change Account Info */}
+
+                      {this.props.FileUpload && (
+                        <FileUpload/>
+                      )}
                     </div>
                     <div className="card-body"></div>
                   </div>

@@ -6,8 +6,8 @@ class GetUserData {
     //var detials=JSON.parse( data2.data)
     var i = "";
     for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
+      name = data2.data[i].F_Name;
+      name += " " + data2.data[i].L_Name;
       console.log(name);
     }
     return name;
@@ -19,8 +19,8 @@ class GetUserData {
     //var detials=JSON.parse( data2.data)
     var i = "";
     for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
+      name = data2.data[i].F_Name;
+      name += " " + data2.data[i].L_Name;
       console.log(name);
     }
     return name;
@@ -32,8 +32,8 @@ class GetUserData {
     //var detials=JSON.parse( data2.data)
     var i = "";
     for (i in data2.data) {
-      name = data2.data[i].fname;
-      name += " " + data2.data[i].lname;
+      name = data2.data[i].F_Name;
+      name += " " + data2.data[i].L_Name;
       console.log(name);
     }
     return name;

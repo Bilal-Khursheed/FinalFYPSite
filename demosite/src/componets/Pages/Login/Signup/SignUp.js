@@ -4,10 +4,18 @@ import axios from "axios";
 
 class Signup extends Component {
   state = {
-    email: "",
-    fullName: "",
-    Username: "",
-    password: "",
+    Email: "",
+    CNIC: "",
+    F_Name: "",
+    L_Name: "",
+    Phone_No: "",
+    Password: "",
+    Hospital: "",
+    Address: "",
+    City: "",
+    State: "",
+    Country: "",
+    Zip_code: "",
     navigate: false,
     role: 1,
   };
@@ -22,17 +30,39 @@ class Signup extends Component {
     console.log("email" + this.state.email);
     e.preventDefault();
     //this will assign these variable values from this.state
-    const { email, fullName, Username, password,role } = this.state;
-    console.log("name after assigning" + email);
+    const {
+      Email,
+      CNIC,
+      F_Name,
+      L_Name,
+      Phone_No,
+      Password,
+      Hospital,
+      Address,
+      City,
+      State,
+      Country,
+      Zip_code,
+      role,
+    } = this.state;
+    console.log("name after assigning" + Email);
 
     //this will send data to rest api then api will send mail with given data to admin
     const form = await axios
       .post("/users/add", {
-        email,
-        fullName,
-        Username,
-        password,
-        role,
+      Email,
+      CNIC,
+      F_Name,
+      L_Name,
+      Phone_No,
+      Password,
+      Hospital,
+      Address,
+      City,
+      State,
+      Country,
+      Zip_code,
+      role,
       })
       .then((res) => {
         if (res.status === 200) {
@@ -61,8 +91,8 @@ class Signup extends Component {
               <input
                 className="text"
                 type="text"
-                name="fullName"
-                placeholder="Your Name"
+                name="F_Name"
+                placeholder="First Name"
                 onChange={this.handleChange}
                 required="required"
               />
@@ -70,8 +100,8 @@ class Signup extends Component {
               <input
                 className="text"
                 type="text"
-                name="Username"
-                placeholder="Username"
+                name="L_Name"
+                placeholder="Last Name"
                 onChange={this.handleChange}
                 required="required"
               />
@@ -79,23 +109,107 @@ class Signup extends Component {
               <input
                 className="text email"
                 type="email"
-                name="email"
+                name="Email"
                 placeholder="Enter Email"
                 onChange={this.handleChange}
                 required="required"
               />
+
               <input
                 className="text"
+                type="text"
+                name="CNIC"
+                placeholder="Enter CNIC"
+                onChange={this.handleChange}
+                required="required"
+              />
+
+              <br />
+              <input
+                className="text"
+                type="text"
+                name="Phone_No"
+                required
+                onChange={this.handleChange}
+                placeholder="Enter Null If no <Phone Number>"
+              />
+              <br />
+              <input
+                className="text"
+                type="text"
+                name="Hospital"
+                placeholder="Enter Null if no <Hospital>"
+                onChange={this.handleChange}
+                required
+              />
+              <br />
+              <input
+                className="text"
+                type="text"
+                name="Address"
+                placeholder="Enter Address"
+                onChange={this.handleChange}
+                required="required"
+              />
+              <br />
+              <div class="form-row">
+                <div class="col-7">
+                  <input
+                    type="text"
+                    name="City"
+                    class="form-control"
+                    placeholder="City"
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+                <div class="col-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="State"
+                    onChange={this.handleChange}
+                    placeholder="Province/State"
+                    required
+                  />
+                </div>
+                <br />
+                <br />
+                <div class="col-7">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Country"
+                    name="Country"
+                    onChange={this.handleChange}
+                    required
+                  />
+                </div>
+                <div class="col-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Zip Code"
+                    onChange={this.handleChange}
+                    name="Zip_code"
+                    required
+                  />
+                </div>
+              </div>
+
+              <input
+                className="text w3lpass"
                 type="password"
-                name="password"
+                name="Password"
                 placeholder="Enter Password"
                 onChange={this.handleChange}
                 required="required"
               />
+
               <input
                 className="text w3lpass"
                 type="password"
-                name="cpassword"
+                name="CPassword"
                 placeholder="Confirm Password"
                 required="required"
               />
