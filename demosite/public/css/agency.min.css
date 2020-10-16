@@ -809,10 +809,14 @@ input:focus {
 }
 
 /* SIGNUP CSS */
-.main-w3layouts {
-  width: 100vw;
-  height: 100vh;
+#signupbg {
+  /* width: 100vw;
+  height: 100vh; */
+
   background-image: url(../img/Login.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 blockquote,

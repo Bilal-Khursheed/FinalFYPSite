@@ -17,7 +17,7 @@ app.get("/changepass", (req, res) => {
   const verifyDoctor = `SELECT * FROM mid.doctor where email='${email}' and password='${oldPassword}';`;
   const verifypatient = `SELECT * FROM mid.patient where email='${email}' and password='${oldPassword}';`;
   const verifyAdmin = `SELECT * FROM mid.adminp where email='${email}' and password='${oldPassword}';`;
-  const changePatientPass= `update mid.user set password='${newPassword}' where email='${email}';`;
+  const changePatientPass= `update mid.patient set password='${newPassword}' where email='${email}';`;
   const changeDoctorPass= `update mid.doctor set password='${newPassword}' where email='${email}';`;
   const changeAdminPass= `update mid.adminp set password='${newPassword}' where email='${email}';`;
   if(role==1){//for user(patient)

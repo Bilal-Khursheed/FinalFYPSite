@@ -11,7 +11,6 @@ app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({ extended: false }));
 
 app.post("/add", async (req, res) => {
-  
   const CNIC = req.body.CNIC;
   const Email = req.body.Email;
   const F_Name = req.body.F_Name;
@@ -24,7 +23,7 @@ app.post("/add", async (req, res) => {
   const State = req.body.State;
   const Country = req.body.Country;
   const Zip_code = req.body.Zip_code;
-  const DOB=req.body.DOB;
+  const DOB = req.body.DOB;
   const role = req.body.role;
   console.log("email :" + Email);
   console.log("name :" + F_Name);
@@ -43,7 +42,7 @@ app.post("/add", async (req, res) => {
       }
     });
   } else if (role === 2) {
-    connection.query(addDoctor, (err, results) => {
+    connection.query(addUser, (err, results) => {
       if (err) {
         res.send(err);
       } else {

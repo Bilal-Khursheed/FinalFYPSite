@@ -5,7 +5,7 @@ class GetAllDoc {
     await fetch(`users/alldoctors`)
       .then((respone) => respone.json())
       .then((Result) => {
-        var alldoctors = JSON.stringify(Result.data);
+        //var alldoctors = JSON.stringify(Result.data);
         var name = [],
           email = [],
           cnic = [],
