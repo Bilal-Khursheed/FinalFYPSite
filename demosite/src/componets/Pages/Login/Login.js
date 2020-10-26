@@ -171,7 +171,7 @@ class Login extends Component {
               </div>
               <div className="card-footer">
                 <div className="d-flex justify-content-center links">
-                  Don't have an account?<Link to="/signup">Sign Up</Link>
+                  Don't have an account?<Link to="/options">Sign Up</Link>
                 </div>
                 <div className="d-flex justify-content-center">
                   <Link to="#">Forgot your password? </Link>

@@ -11,8 +11,16 @@ class Report extends Component {
     super(props);
     this.state = {
       navigate: false,
+      pName: "",
+      dName:"",
+      Age : "",
+      ReportID:"",
+      Address: "",
+      Date: "",
+
     };
   }
+
   printDocument() {
     // setTimeout(() => this.setState({ navigate: true }), 20);
     const input = document.getElementById("output");
@@ -58,14 +66,29 @@ class Report extends Component {
 
     doc.save("demo.pdf");*/
   }
+  handleChange =()=>{
+    var data = sessionStorage.getItem("report");
+    var data2 = JSON.parse(data);
+    
+    //var detials=JSON.parse( data2.data)
+    var i = "";
+    for (i in data2.data) {
+      var Pname =data2.data[i].F_Name + ''+ data2.data[i].L_Name;;
+      this.setState({pName:Pname});
+      this.setState({Age:data2.data[i].Age})
+      this.setState({ReportID: data2.data[i].ReportID})
+     
+    }
+  }
 
   render() {
+
     if (this.state.navigate) {
       return <Redirect to="/doctorportal" />;
     }
     setTimeout(() => this.setState({ navigate: true }), 20);
     return (
-      <div>
+      <div onLoad={this.handleChange}>
         <div id="output" onLoad={this.printDocument} style={{ color: "black" }}>
           <div class="container ">
             <div class="bg-light">
@@ -95,7 +118,7 @@ class Report extends Component {
                   <tbody style={{ color: "black" }}>
                     <tr>
                       <th scope="row">1234</th>
-                      <td>Muhammad Umar</td>
+    <td>{this.state.pName}</td>
                       <td>House 123, Street abc, Rwp</td>
                       <td>August 24, 2020</td>
                     </tr>

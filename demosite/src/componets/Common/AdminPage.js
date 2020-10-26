@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import 'tachyons'
 
-import Footer from "./Footer";
-import Copyright from "./Copyright";
+import Footer from "./MIDWebsite/Footer";
+import Copyright from "./MIDWebsite/Copyright";
 
 const Admin = {
     color : "Black"

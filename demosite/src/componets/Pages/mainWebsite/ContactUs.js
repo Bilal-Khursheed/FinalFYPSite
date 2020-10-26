@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Footer from "../../Common/Footer";
-import Copyright from "../../Common/Copyright";
-import Contact from "../../Common/Contact";
+import Footer from "../../Common/MIDWebsite/Footer";
+import Copyright from "../../Common/MIDWebsite/Copyright";
+import Contact from "../../Common/MIDWebsite/Contact";
 
 class ContactUs extends Component {
   render() {

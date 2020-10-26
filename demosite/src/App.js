@@ -14,8 +14,8 @@ import MainTeam from "./componets/Pages/mainWebsite/MainTeam";
 import Login from "./componets/Pages/Login/Login";
 import SignUp from "./componets/Pages/Login/Signup/SignUp";
 import AdminPage from "./componets/Common/AdminPage";
-import BreastCancer from "./componets/Common/BreastCancer";
-import BrainTumor from "./componets/Common/BrainTumor";
+import BreastCancer from "./componets/Common/MIDWebsite/BreastCancer";
+import BrainTumor from "./componets/Common/MIDWebsite/BrainTumor";
 import Tuberculosis from "./componets/Common/Tuberculosis";
 import Reportpdf from "./PDFworking/Reportpdf";
 import AdminPortal from "./componets/Pages/adminPortal/AdminPortal";
@@ -37,10 +37,20 @@ import DoctorAccInfo from "./componets/Pages/DoctorPortal/DocChangeInfo";
 import PatientAccInfo from "./componets/Pages/PatientPortal/PatientChangeInfo";
 import Error404 from "./componets/Pages/404page/Error404";
 
-
-
 //this is for test purpose
 import pdf from "./PDFworking/pdfreport";
+
+//option
+import options from "./componets/Pages/Login/Option";
+// Pat Signup
+import PatSignup from "./componets/Pages/Login/Signup/PatSignup"
+// Admin Signup
+import AdminSignup from "./componets/Pages/Login/Signup/AdminSignup"
+// MRI UPLOAD AND GET REPORT
+import GetReport from "./componets/Pages/DoctorPortal/GetReport"
+// Single Patient data show in table
+import SinglePat from "./componets/Pages/DoctorPortal/SinglePat"
+
 
 function App() {
   return (
@@ -48,7 +58,6 @@ function App() {
       <Switch>
         <PageWrapper>
           <Route exact={true} path="/" component={Home} />
-          
 
           <Route path="/about" component={AboutUs} />
 
@@ -60,6 +69,7 @@ function App() {
 
           <Route path="/login" component={Login} />
 
+          <Route path="/options" component={options} />
           <Route exact={true} path="/signup" component={SignUp} />
 
           {
@@ -103,6 +113,10 @@ function App() {
 
           <ProtectedRoute path="/patientaccinfo" component={PatientAccInfo} />
 
+          <ProtectedRoute path="/getreport" component={GetReport} />
+
+          <ProtectedRoute path="/singlepat" component={SinglePat} />
+
           <Route
             component={AdminPage}
             // auth={this.state.auth}
@@ -114,6 +128,10 @@ function App() {
           <Route path="/braintumor" component={BrainTumor} />
 
           <Route path="/tuberculosis" component={Tuberculosis} />
+
+          <Route path="/patsignup" component={PatSignup} />
+
+          <Route path="/adminsignup" component={AdminSignup} />
 
           <Route path="/report2" component={Reportpdf} />
           <Route path="/report" component={pdf} />

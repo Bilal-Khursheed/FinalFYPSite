@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Header from "../../Common/Header";
+import Header from "../../Common/MIDWebsite/Header";
 import image from '../../assests/img/Team.png'
-import Team from '../../Common/Team';
-import Footer from "../../Common/Footer";
-import Copyright from '../../Common/Copyright';
+import Team from '../../Common/MIDWebsite/Team';
+import Footer from "../../Common/MIDWebsite/Footer";
+import Copyright from '../../Common/MIDWebsite/Copyright';
 
 class MainTeam extends Component
 {

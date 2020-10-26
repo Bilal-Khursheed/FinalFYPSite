@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Portal from "../../Common/portal";
-import Copyright from "../../Common/Copyright";
+import Copyright from "../../Common/MIDWebsite/Copyright";
 import UserInfo from "../../userInfo/GetData";
 import alldoc from "../../doctorData/GetAllDoc"
 

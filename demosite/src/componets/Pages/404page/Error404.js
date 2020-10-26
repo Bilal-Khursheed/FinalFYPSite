@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Copyright from "../../Common/Copyright";
+import Copyright from "../../Common/MIDWebsite/Copyright";
 
 class Error404 extends Component {
   render() {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+/*import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "tachyons";
 
@@ -42,3 +42,5 @@ class Tuberculosis extends Component {
 }
 
 export default Tuberculosis;
+
+*/

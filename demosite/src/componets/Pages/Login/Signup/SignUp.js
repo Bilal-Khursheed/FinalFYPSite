@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import $ from "jquery"
 
 class Signup extends Component {
   state = {
@@ -82,12 +83,20 @@ class Signup extends Component {
     if (this.state.navigate) {
       return <Redirect to="/" />;
     }
+    $(document).ready(function () {
+      $('#Password, #CPassword').on('keyup', function () {
+        if ($('#Password').val() == $('#CPassword').val()) {
+          $('#message').html('Password Matching').css('color', 'green');
+        } else 
+          $('#message').html('Password Not Matching').css('color', 'red');
+      });
+    })
     return (
       <div id="signupbg">
         <div class="container pb-5 pt-5">
-          <h1 className="bt-5 pt-5 text-center ">SIGN UP</h1>
-          <h5 class="text-center">Add details</h5>
-          <form class="form-row" action="/action_page.php">
+          <h1 className="bt-5 pt-5 text-center ">DOCTOR SIGN UP</h1>
+          <h5 class="text-center">Add Details</h5>
+          <form class="form-row" onSubmit={this.handleSubmit}>
             <div class="form-group col-lg-6 col-12">
               <label for="Fname"> First Name:</label>
               <input
@@ -143,7 +152,7 @@ class Signup extends Component {
               <label for="CNIC">Id Card Number:</label>
               <input
                 type="Number"
-                class="form-control bg-transparent"
+                class="form-control bg-transparentvtext-light"
                 id="CNIC"
                 placeholder="Enter Id card Number"
                 name="CNIC"
@@ -156,7 +165,7 @@ class Signup extends Component {
               <label for="Phone_No">Phone Number:</label>
               <input
                 type="Number"
-                class="form-control bg-transparent"
+                class="form-control bg-transparent text-light"
                 id="Phone_No"
                 placeholder="Enter Phone Number"
                 name="Phone_No"
@@ -237,20 +246,23 @@ class Signup extends Component {
                 name="Password"
                 required
                 onChange={this.handleChange}
+                minLength="8"
               />
             </div>
 
             <div class="form-group col-lg-6 col-12">
-              <label for="Password">Confirm Password:</label>
+              <label for="CPassword">Confirm Password:</label>
               <input
                 type="Password"
                 class="form-control"
-                id="Password"
+                id="CPassword"
                 placeholder="Confirm Password"
-                name="Password"
+                name="CPassword"
                 required
                 onChange={this.handleChange}
+                minLength="8"
               />
+              <span id="message"></span>
             </div>
 
             {/* <div class="checkbox">

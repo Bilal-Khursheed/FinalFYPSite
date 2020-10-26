@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Portal from "../../Common/portal";
-import Copyright from "../../Common/Copyright";
+import Copyright from "../../Common/MIDWebsite/Copyright";
 import DocInfo from "../../userInfo/GetData"
 class DoctorsPortal extends Component {
   render() {
@@ -58,7 +58,9 @@ class DoctorsPortal extends Component {
           //  Chnage Account Info
           ChangeAccInfo=""
           // upload File MRI to get Gifs
-          FileUpload="true"
+          FileUpload=""
+          // Enter ID of Patient you want to get MRI
+          PreReport="true"
         />
         <Copyright/>
       </div>

@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import image from "../../assests/img/human.png";
 
 // Pages
-import Header from "../../Common/Header";
-import Services from "../../Common/Services";
-import ServiceDetails from "../../Common/ServiceDetails";
-import Contact from "../../Common/Contact";
-import Footer from "../../Common/Footer";
-import Copyright from '../../Common/Copyright'
+import Header from "../../Common/MIDWebsite/Header";
+import Services from "../../Common/MIDWebsite/Services";
+import ServiceDetails from "../../Common/MIDWebsite/ServiceDetails";
+import Contact from "../../Common/MIDWebsite/Contact";
+import Footer from "../../Common/MIDWebsite/Footer";
+import Copyright from '../../Common/MIDWebsite/Copyright'
 
 
 class MainServices extends Component 

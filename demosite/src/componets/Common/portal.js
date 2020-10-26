@@ -7,7 +7,13 @@ import GetEmail from "../userInfo/GetEmail";
 import changepass from "../chnagedata/changePass";
 import allDoc from "../doctorData/GetAllDoc";
 import $ from "jquery";
-import FileUpload from "../Common/FileUpload"
+import FileUpload from "../Common/FileUpload";
+import AddPat from "../Common/AddPatient";
+import PreReport from "../Pages/DoctorPortal/PreReport";
+import BeforeReport from "../Pages/PatientPortal/BeforeReport";
+import PatientHistory from "../patientData/getPatientHistory";
+
+import changeEmail from "../chnagedata/changeEmail";
 
 const SubStyle = {
   color: "#fec503",
@@ -19,7 +25,7 @@ class portal extends Component {
 
     this.state = {
       timeout: 1000 * 900,
-      navigate: false,
+      navigate: 0,
       isTimedOut: false,
       showModal: true,
 
@@ -34,10 +40,19 @@ class portal extends Component {
 
       //only run one time
 
-      v:0,
+      v: 0,
+      w: 0,
 
       //display all doctors
-      tableName: ""
+      tableName: "",
+
+      //for email change
+      newEmail: "",
+      oldEmail: "",
+      Epassword: "",
+
+      //to delete doc and pat
+      Idcard: "",
     };
     this.idleTimer = null;
     this.onAction = this._onAction.bind(this);
@@ -64,6 +79,27 @@ class portal extends Component {
     //var Userdata=GetEmail.email()
     //console.log("here is the mail from localstorage" + Userdata[0] +" and role is "+Userdata[1] );
   };
+  updateEmail = (e) => {
+    const { email, newEmail, Epassword, role } = this.state;
+    changeEmail.ChangeEmail(email, newEmail, Epassword, role);
+  };
+  deletedata = async () => {
+    const CNIC = this.state.Idcard;
+    await fetch(`/users/deletePD?CNIC=${CNIC}`)
+      .then((respone) => respone.json())
+      .then((Result) => {
+        if (
+          Result.status === "DotorDeleted" ||
+          Result.status === "PatientDeleted"
+        ) {
+          console.log("Email is changed");
+          alert("User is deleted");
+        } else {
+          console.log("ID is not correct");
+          alert("User ID is not correct");
+        }
+      });
+  };
   Changepassword = (e) => {
     const { email, oldPassword, newPassword, role } = this.state;
     console.log(" data is " + email);
@@ -74,31 +110,97 @@ class portal extends Component {
     changepass.changePassword(email, oldPassword, newPassword, role);
   };
 
-  alldoctors = async (e) => {
-    var alldoctors = await allDoc.allDoc();
+  patienthistory = async (e) => {
+    var patientHistory = await PatientHistory.getpatientHistory();
     // var name=JSON.parse(alldoctors)
-    var length=JSON.stringify(alldoctors.names.length);
+    var length = JSON.stringify(patientHistory.names.length);
     console.log("data of the doctor" + length);
-    var x; var y=length;
-    
-    if(this.state.v===0 ){
-    for( x=0; x<length; x++){
-      console.log("working in for loop" + this.state.tableName)
-    $("#tabledata").prepend(
-      `<tr><th scope="row">`+y+`</th><td>`+alldoctors.names[x].toUpperCase()+`</td><td>`+alldoctors.emails[x]+`</td><td>`+alldoctors.cnic[x]+`</td>
-      <td>`+alldoctors.address[x]+`</td>
-    </tr>`)
-      y--
-      this.setState({v:1})
+    var x;
+    var y = length;
+
+    if (this.state.w === 0) {
+      for (x = 0; x < length; x++) {
+        console.log("working in for loop" + this.state.tableName);
+        $("#patientHistory").prepend(
+          `<tr><th scope="row">` +
+            y +
+            `</th><td>` +
+            patientHistory.Report_ID[x].toUpperCase() +
+            `</td><td>` +
+            patientHistory.Dated[x] +
+            `</td>
+      <td>` +
+            patientHistory.Hospital[x] +
+            `</td><td>` +
+            patientHistory.names[x] +
+            `</td>
+          
+            <td>
+            <a href="/viewhistory"> <button
+             class="btn btn-primary pathistory" 
+            > <i class="far fa-eye"></i></button></a>
+  </td>
+    </tr>`
+        );
+        y--;
+        this.setState({ w: 1 });
+      }
     }
-  }
-   /* do {
+    /* do {
       $("#tabledata").prepend(
         '<tr><th scope="row">1</th><td>Muhammad Umar</td><td>umarnazaket@gmail.com</td>'
       
     } while (alldoctors.names.length);*/
     //this.setState({ docname: alldoctors[1] });
   };
+
+  alldoctors = async (e) => {
+    var alldoctors = await allDoc.allDoc();
+    // var name=JSON.parse(alldoctors)
+    var length = JSON.stringify(alldoctors.names.length);
+    console.log("data of the doctor" + length);
+    var x;
+    var y = length;
+
+    if (this.state.v === 0) {
+      for (x = 0; x < length; x++) {
+        console.log("working in for loop" + this.state.tableName);
+        $("#tabledata").prepend(
+          `<tr><th scope="row">` +
+            y +
+            `</th><td>` +
+            alldoctors.names[x].toUpperCase() +
+            `</td><td>` +
+            alldoctors.emails[x] +
+            `</td><td>` +
+            alldoctors.cnic[x] +
+            `</td>
+      <td>` +
+            alldoctors.address[x] +
+            `</td><td>
+            <a href="/viewhistory"> <button
+             class="far fa-eye pathistory" value=` +
+            alldoctors.cnic[x] +
+            `></button></a>
+  </td>
+    </tr>`
+        );
+        y--;
+        this.setState({ v: 1 });
+      }
+    }
+    /* do {
+      $("#tabledata").prepend(
+        '<tr><th scope="row">1</th><td>Muhammad Umar</td><td>umarnazaket@gmail.com</td>'
+      
+    } while (alldoctors.names.length);*/
+    //this.setState({ docname: alldoctors[1] });
+  };
+  viewReport() {
+    console.log("workig");
+    var x = document.getElementById("myBtn").name;
+    console.log("here is the name of the button " + x);
+  }
   _onAction(e) {
     console.log("user did something", e);
     this.setState({ isTimedOut: false });
@@ -114,7 +216,7 @@ class portal extends Component {
     const isTimedout = this.state.isTimedOut;
     if (isTimedout) {
       console.log("in time out");
-      setTimeout(() => this.setState({ navigate: true }), 20);
+      setTimeout(() => this.setState({ navigate: 1 }), 20);
       Auth.logout();
       alert("you are login off to use system you have to Login Again");
     } else {
@@ -146,8 +248,10 @@ window.onload = function () {
             console.log("on load")
 };*/
 
-    if (this.state.navigate) {
+    if (this.state.navigate === 1) {
       return <Redirect to="/login" />;
+    } else if (this.state.navigate === 2) {
+      return <Redirect to="/" />;
     }
     $(document).ready(function () {
       var navListItems = $("div.setup-panel div a"),
@@ -199,6 +303,14 @@ window.onload = function () {
         e.preventDefault();
         $("body").toggleClass("sb-sidenav-toggled");
       });
+
+      // Showing single patient history on click
+      $(".pathistory").on("click", function (e) {
+        e.preventDefault();
+        console.log("button is working brooooo");
+        var x = $(this).val();
+        console.log("Here is the name of the buttibn" + x);
+      });
     });
 
     return (
@@ -211,11 +323,11 @@ window.onload = function () {
           //element={document}
           //onActive={this.onActive}
           onIdle={this.onIdle}
-         // onAction={this.onAction}
+          // onAction={this.onAction}
           // debounce={250}
           // timeout={this.state.timeout}
         />
-        <body className="sb-nav-fixed" >
+        <body className="sb-nav-fixed">
           <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <Link className="navbar-brand" to={this.props.portallink}>
               {this.props.PortalName}
@@ -450,81 +562,82 @@ window.onload = function () {
                     <div className="card-header">
                       {/* Start of add Doctor Patient */}
                       {this.props.addpatdoc && (
-                        <div class="container bg-dark pb-5 pt-5">
-                          <h2>Add {this.props.addtype}</h2>
-                          <p>
-                            Add details of {this.props.addtype}, you want to add
-                          </p>
-                          <form class="form" action="/action_page.php">
-                            <div class="form-group">
-                              <label for="name">Name:</label>
-                              <input
-                                type="text"
-                                class="form-control col-sm-4"
-                                id="name"
-                                placeholder="Enter name"
-                                name="name"
-                              />
-                            </div>
+                        <AddPat />
+                        // <div class="container bg-dark pb-5 pt-5">
+                        //   <h2>Add {this.props.addtype}</h2>
+                        //   <p>
+                        //     Add details of {this.props.addtype}, you want to add
+                        //   </p>
+                        //   <form class="form" action="/action_page.php">
+                        //     <div class="form-group">
+                        //       <label for="name">Name:</label>
+                        //       <input
+                        //         type="text"
+                        //         class="form-control col-sm-4"
+                        //         id="name"
+                        //         placeholder="Enter name"
+                        //         name="name"
+                        //       />
+                        //     </div>
 
-                            {/* <div class="form-group">
-                            <label for="username">User Name:</label>
-                            <input
-                              type="text"
-                              class="form-control col-sm-4"
-                              id="username"
-                              placeholder="Enter Username"
-                              name="username"
-                            />
-                          </div> */}
+                        //     {/* <div class="form-group">
+                        //     <label for="username">User Name:</label>
+                        //     <input
+                        //       type="text"
+                        //       class="form-control col-sm-4"
+                        //       id="username"
+                        //       placeholder="Enter Username"
+                        //       name="username"
+                        //     />
+                        //   </div> */}
 
-                            <div class="form-group">
-                              <label for="email">Email:</label>
-                              <input
-                                type="email"
-                                class="form-control col-sm-4"
-                                id="email"
-                                placeholder="Enter email"
-                                name="email"
-                              />
-                            </div>
+                        //     <div class="form-group">
+                        //       <label for="email">Email:</label>
+                        //       <input
+                        //         type="email"
+                        //         class="form-control col-sm-4"
+                        //         id="email"
+                        //         placeholder="Enter email"
+                        //         name="email"
+                        //       />
+                        //     </div>
 
-                            <div class="form-group">
-                              <label for="Idcard">Id Card Number:</label>
-                              <input
-                                type="Number"
-                                class="form-control col-sm-4"
-                                id="Idcard"
-                                placeholder="Enter Id card Number"
-                                name="Idcard"
-                              />
-                            </div>
+                        //     <div class="form-group">
+                        //       <label for="Idcard">Id Card Number:</label>
+                        //       <input
+                        //         type="Number"
+                        //         class="form-control col-sm-4"
+                        //         id="Idcard"
+                        //         placeholder="Enter Id card Number"
+                        //         name="Idcard"
+                        //       />
+                        //     </div>
 
-                            <div class="form-group">
-                              <label for="Address">Address:</label>
-                              <input
-                                type="text"
-                                class="form-control col-sm-4"
-                                id="Address"
-                                placeholder="Enter Address"
-                                name="Address"
-                              />
-                            </div>
+                        //     <div class="form-group">
+                        //       <label for="Address">Address:</label>
+                        //       <input
+                        //         type="text"
+                        //         class="form-control col-sm-4"
+                        //         id="Address"
+                        //         placeholder="Enter Address"
+                        //         name="Address"
+                        //       />
+                        //     </div>
 
-                            {/* <div class="checkbox">
-                          <label>
-                            <input type="checkbox" name="remember" /> Remember
-                            me
-                          </label>
-                        </div> */}
-                            <button
-                              type="submit"
-                              class="btn btn-default text-primary bg-light"
-                            >
-                              Add {this.props.addtype}
-                            </button>
-                          </form>
-                        </div>
+                        //     {/* <div class="checkbox">
+                        //   <label>
+                        //     <input type="checkbox" name="remember" /> Remember
+                        //     me
+                        //   </label>
+                        // </div> */}
+                        //     <button
+                        //       type="submit"
+                        //       class="btn btn-default text-primary bg-light"
+                        //     >
+                        //       Add {this.props.addtype}
+                        //     </button>
+                        //   </form>
+                        // </div>
                       )}
                       {/* End Of add Doctor Patient */}
 
@@ -533,11 +646,10 @@ window.onload = function () {
                         <div class="container bg-dark pb-5 pt-5">
                           <h2>Delete {this.props.addtype}</h2>
                           <p>
-                            Add Email or CNIC of {this.props.addtype}, you want
-                            to delete
+                            Add CNIC of {this.props.addtype}, you want to delete
                           </p>
-                          <form class="form" action="/action_page.php">
-                            <div class="form-group">
+                          <form class="form">
+                            {/* <div class="form-group">
                               <label for="email">Email:</label>
                               <input
                                 type="email"
@@ -546,7 +658,7 @@ window.onload = function () {
                                 placeholder="Enter email"
                                 name="email"
                               />
-                            </div>
+                      </div>*/}
 
                             <div class="form-group">
                               <label for="Idcard">Id Card Number:</label>
@@ -556,6 +668,7 @@ window.onload = function () {
                                 id="Idcard"
                                 placeholder="Enter Id card Number"
                                 name="Idcard"
+                                onChange={this.handleChange}
                               />
                             </div>
 
@@ -568,6 +681,7 @@ window.onload = function () {
                             <button
                               type="submit"
                               class="btn btn-default text-primary bg-light"
+                              onClick={this.deletedata}
                             >
                               Delete {this.props.addtype}
                             </button>
@@ -580,8 +694,10 @@ window.onload = function () {
                       {this.props.history1 && (
                         <div>
                           <h2>{this.props.addtype} List</h2>
-                          <table class="table table-hover table-dark"  onLoad=
-                          {this.alldoctors()}>
+                          <table
+                            class="table table-hover table-dark"
+                            onLoad={this.alldoctors()}
+                          >
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
@@ -589,10 +705,11 @@ window.onload = function () {
                                 <th scope="col">Email</th>
                                 <th scope="col">Id Card Number</th>
                                 <th scope="col">Address</th>
+                                <th scope="col">View</th>
                               </tr>
                             </thead>
                             <tbody id="tabledata">
-                             {/* <tr>
+                              {/* <tr>
                                 <th scope="row">1</th>
                                 <td>Muhammad Umar</td>
                                 <td>umarnazaket@gmail.com</td>
@@ -624,43 +741,48 @@ window.onload = function () {
 
                       {/* Start of Get Report */}
                       {this.props.getReport && (
-                        <div class="container bg-dark pb-5 pt-5">
-                          <h2>Report</h2>
-                          <p>Add ID of report You want to get.</p>
-                          <form class="form" action="/action_page.php">
-                            <div class="form-group">
-                              <label for="reportid">Report ID:</label>
-                              <input
-                                type="number"
-                                class="form-control col-sm-4"
-                                id="reportid"
-                                placeholder="Enter Report ID"
-                                name="reportid"
-                              />
-                            </div>
+                        <BeforeReport />
+                        // <div class="container bg-dark pb-5 pt-5">
+                        //   <h2>Report</h2>
+                        //   <p>Add ID of report You want to get.</p>
+                        //   <form class="form" action="/action_page.php">
+                        //     <div class="form-group">
+                        //       <label for="reportid">Report ID:</label>
+                        //       <input
+                        //         type="number"
+                        //         class="form-control col-sm-4"
+                        //         id="reportid"
+                        //         placeholder="Enter Report ID"
+                        //         name="reportid"
+                        //       />
+                        //     </div>
 
-                            {/* <div class="checkbox">
+                        /* <div class="checkbox">
                           <label>
                             <input type="checkbox" name="remember" /> Remember
                             me
                           </label>
-                        </div> */}
-                            <button
-                              type="submit"
-                              class="btn btn-default text-primary bg-light"
-                            >
-                              Get Report
-                            </button>
-                          </form>
-                        </div>
+                        </div> */
+                        //     <button
+                        //       type="submit"
+                        //       class="btn btn-default text-primary bg-light"
+                        //     >
+                        //       Get Report
+                        //     </button>
+                        //   </form>
+                        // </div>
                       )}
                       {/* End Of Get Report */}
 
                       {/* Start Of Single Patient History */}
                       {this.props.history2 && (
                         <div>
-                          <h2>{this.props.addtype} List</h2>
-                          <table class="table table-hover table-dark">
+                          <h2>{this.props.addtype} Detail</h2>
+                          <table
+                            class="table table-hover table-dark"
+                            id="patientHistory"
+                            onLoad={this.patienthistory()}
+                          >
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
@@ -671,7 +793,7 @@ window.onload = function () {
                                 <th scope="col">View Report</th>
                               </tr>
                             </thead>
-                            <tbody>
+                            {/* <tbody>
                               <tr>
                                 <th scope="row">1</th>
                                 <td>12345</td>
@@ -708,7 +830,7 @@ window.onload = function () {
                                   </button>
                                 </td>
                               </tr>
-                            </tbody>
+                           </tbody>*/}
                           </table>
                         </div>
                       )}
@@ -768,6 +890,8 @@ window.onload = function () {
                                       type="email"
                                       required="required"
                                       class="form-control"
+                                      name="oldEmail"
+                                      onChange={this.handleChange}
                                       placeholder="Enter Old Email"
                                     />
                                   </div>
@@ -780,7 +904,9 @@ window.onload = function () {
                                       type="email"
                                       required="required"
                                       class="form-control"
+                                      name="newEmail"
                                       placeholder="Enter New Email"
+                                      onChange={this.handleChange}
                                     />
                                   </div>
                                   <div class="form-group">
@@ -788,10 +914,12 @@ window.onload = function () {
                                       Password
                                     </label>
                                     <input
-                                      maxlength="100"
+                                      minLength="8"
                                       type="password"
                                       required="required"
                                       class="form-control"
+                                      name="Epassword"
+                                      onChange={this.handleChange}
                                       placeholder="Enter Password"
                                     />
                                   </div>
@@ -799,6 +927,7 @@ window.onload = function () {
                                   <button
                                     class="btn btn-primary btn-lg pull-right"
                                     type="button"
+                                    onClick={this.updateEmail}
                                   >
                                     Change Email
                                   </button>
@@ -861,6 +990,7 @@ window.onload = function () {
                                         class="form-control"
                                         placeholder="Enter Old Password"
                                         onChange={this.handleChange}
+                                        minLength="8"
                                       />
                                     </div>
                                     <div class="form-group">
@@ -875,6 +1005,7 @@ window.onload = function () {
                                         class="form-control"
                                         placeholder="Enter New Password"
                                         onChange={this.handleChange}
+                                        minLength="8"
                                       />
                                     </div>
                                     <div class="form-group">
@@ -907,9 +1038,8 @@ window.onload = function () {
                       )}
                       {/* End Of Change Account Info */}
 
-                      {this.props.FileUpload && (
-                        <FileUpload/>
-                      )}
+                      {this.props.FileUpload && <FileUpload />}
+                      {this.props.PreReport && <PreReport />}
                     </div>
                     <div className="card-body"></div>
                   </div>
